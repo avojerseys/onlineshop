@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magazin Tricouri Fotbal</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="left">
+      <button onclick="navigateTo('homepage')">Acasa</button>
+      <button onclick="navigateTo('tricouri')">Tricouri</button>
+      <a href="how-to-order.html">Cum să comanzi</a>
+      <a href="discount.html">Discount</a>
+      <a href="marimi.html">Despre Marimi</a>
+    </div>
+    <div class="center" style="text-align: center;">
+
+    </div>
+    <div class="right">
+      <input type="text" placeholder="Cauta..." oninput="searchProduct(this.value)">
+      <img src="images/search1.png" alt="Search" class="icon search-icon">
+      <img src="images/shopping.png" alt="Cos" class="icon cart-icon" onclick="openCart()">
+    </div>
+  </header>
+
+
+
+  <div id="order-overlay" class="overlay" style="display: none;">
+    <div class="overlay-content">
+      <h2>Plasează comanda</h2>
+      <form id="order-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Introdu emailul" required>
+        <label for="address">Adresa:</label>
+        <input type="text" id="address" placeholder="Introdu adresa" required>
+        <label for="phone">Număr de telefon:</label>
+        <input type="text" id="phone" placeholder="Introdu numărul de telefon" required>
+        <label for="county">Județ:</label>
+        <input type="text" id="county" placeholder="Introdu județul" required>
+        <label for="street">Strada:</label>
+        <input type="text" id="street" placeholder="Introdu strada" required>
+        <label for="city">Oraș/Sat:</label>
+        <input type="text" id="city" placeholder="Introdu orașul sau satul" required>
+        <label for="postal-code">Cod Postal:</label>
+        <input type="text" id="postal-code" placeholder="Introdu codul postal" required>
+        <label for="delivery-method">Metoda de livrare:</label>
+        <select id="delivery-method">
+          <option value="fan">Fan Courier</option>
+        </select>
+  
+        <!-- Cod de reducere -->
+        <label for="discount-code">Cod de reducere:</label>
+        <input type="text" id="discount-code" placeholder="Introdu codul de reducere">
+        <button type="button" onclick="applyDiscount()">Aplică reducerea</button>
+        <div id="order-summary"></div>
+        <p>Vei primi un e-mail pentru instiintarea confirmarii comenzii cat de repede de catre stafful nostru</p>
+        <h1>Nota: E-mailul se poate primi pana la 1-2ore deoarece este un proces manual</h1>
+        <button onclick="submitOrderWithWhatsApp()" style="display: flex; align-items: center; gap: 10px; padding: 10px 20px; background-color: #1a1f1c; color: white; border: none; border-radius: 5px; cursor: pointer;">
+          <img src="images/wsp.png" alt="WhatsApp" style="width: 20px; height: 20px;"> 
+          Finalizează cu WhatsApp
+      </button>
+      </button>
+        <button type="button" onclick="closeOverlay()">Anulează</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+  <!-- Content -->
+  <main id="content" class="section"></main>
+
+<!-- Secțiunea Social Media -->
+<div class="social-media" style="text-align: center; margin: 20px 0;">
+  <h3>Urmărește-ne pe rețelele de socializare</h3>
+  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
+    <a href="https://www.tiktok.com/@contul_tiktok" target="_blank" style="text-decoration: none;">
+      <img src="images/tt.png" alt="TikTok" style="width: 50px; height: 50px;">
+    </a>
+    <a href="https://www.instagram.com/contul_instagram" target="_blank" style="text-decoration: none;">
+      <img src="images/instagram.png" alt="Instagram" style="width: 50px; height: 50px;">
+    </a>
+  </div>
+</div>
+
+
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <p>&copy; 2025 Magazin Tricouri Fotbal</p>
+    <p>Contact: <a href="mailto:contact@tricourifotbal.ro">avojerseys@gmail.com</a></p>
+    <p>Telefon: +40 123 456 789</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
