@@ -1,17 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discount</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Reducere Specială</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <img src="images/discount.jpg" alt="Special Discount" class="promo-background">
+    <style>
+
+body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .promo-section {
+            position: relative;
+            text-align: center;
+            color: white;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .promo-background {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asigură că imaginea acoperă întregul ecran fără să taie părți importante */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .promo-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 5px rgb(0, 0, 0);
+            padding: 20px;
+        }
+
+        .promo-text h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .promo-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ff2222;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e64a19;
+        }
+
+        .code-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <div id="discount-container">
-        <button id="discount-button" onclick="showMessage()">Obține Codul</button>
-        <a id="home-button" href="index.html">Acasa</a>
-        <p id="message" style="display: none;">Codul tău de reducere este: AVO10</p>
+    <div class="promo-section">
+        <div class="promo-text">
+            <h1>Reducere de Primăvară!</h1>
+            <p>Profită acum de -10% la toate produsele! Oferta valabilă doar până la sfârșitul lunii.</p>
+            <button class="cta-button" id="get-code-button">Obține Codul</button>
+            <button class="cta-button" id="view-offer-button">Acasa</button>
+            <div class="code-display" id="promo-code" style="display: none;">Codul tău: AVO10</div>
+        </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        document.getElementById('get-code-button').addEventListener('click', function() {
+            const codeDisplay = document.getElementById('promo-code');
+            codeDisplay.style.display = 'block';
+        });
+    
+        document.getElementById('view-offer-button').addEventListener('click', function() {
+            window.location.href = 'index.html'; // Redirecționează utilizatorul către pagina principală
+        });
+        </script>
 </body>
 </html>

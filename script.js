@@ -30,15 +30,17 @@ window.onload = function () {
   
   function navigateTo(section) {
     const content = document.getElementById('content');
-    const footer = document.getElementById('footer');
   
     if (section === 'homepage') {
       footer.style.display = 'block';
       content.innerHTML = `
-        <div class="homepage" style="background: url('images/avo.jpg') no-repeat center center; background-size: cover; color: blue; padding: 50px;">
-          <h1>Bine ai venit la Magazinul de Tricouri Fotbal</h1>
-          <p>Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
-        </div>
+        <div class="welcome-section">
+    <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri Fotbal</h1>
+    <p class="gradient-text-subtitle">Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
+    <a href="recenzi.html" class="elegant-button">Vezi Recenzii!</a>
+</div>
+
+
       `;
     } else if (section === 'tricouri') {
       footer.style.display = 'none';
@@ -107,7 +109,7 @@ window.onload = function () {
               <img src="${p.image}" alt="${p.name}" style="width: 100%; height: auto; border-radius: 5px; margin-bottom: 10px;">
               <p style="font-size: 14px; font-weight: bold; margin: 5px 0;">${p.name}</p>
               <p style="font-size: 14px; color: #555;">${p.price}</p>
-              <button onclick="viewProduct(${p.id})" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Vezi detalii</button>
+              <button onclick="viewProduct(${p.id})" style="padding: 5px 10px; background-color:rgb(0, 0, 0); color: white; border: none; border-radius: 5px; cursor: pointer;">Vezi detalii</button>
             </div>
           `).join('')}
         </div>
@@ -163,7 +165,7 @@ window.onload = function () {
   
     html += `
       </div>
-      <button onclick="openCheckoutOverlay()" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Checkout</button>
+      <button onclick="openCheckoutOverlay()" style="margin-top: 20px; padding: 10px 20px; background-color:rgb(0, 0, 0); color: white; border: none; border-radius: 5px; cursor: pointer;">Checkout</button>
     `;
   
     content.innerHTML = html;
@@ -570,3 +572,88 @@ function deleteOrder(orderId) {
 
 
 
+// Funcție care afișează secțiunile site-ului
+function showSection(section) {
+  const footer = document.querySelector('footer'); // Selectează footer-ul
+  const content = document.querySelector('#content'); // Selectează div-ul pentru conținut
+
+  // Resetează conținutul
+  content.innerHTML = '';
+  footer.style.display = 'none'; // Ascunde footer-ul implicit
+
+  if (section === 'homepage') {
+      // Afișează pagina homepage
+      footer.style.display = 'block'; // Afișează footer-ul
+      content.innerHTML = `
+        <div class="welcome-section">
+    <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri Fotbal</h1>
+    <p class="gradient-text-subtitle">Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
+    <a href="recenzi.html" class="elegant-button">Vezi Recenzii!</a>
+</div>
+
+      `;
+  } else if (section === 'tricouri') {
+      // Afișează pagina tricouri folosind logica existentă
+      footer.style.display = 'block'; // Afișează footer-ul
+      showProducts(); // Funcția care generează produsele (există deja în codul tău)
+  } else if (section === 'faq') {
+      footer.style.display = 'block'; // Afișează footer-ul
+      showFAQ(); // Funcție deja configurată pentru FAQ
+  } else if (section === 'reviews') {
+      footer.style.display = 'block'; // Afișează footer-ul
+      showReviews(); // Funcție deja configurată pentru recenzii
+  } else if (section === 'orders') {
+      footer.style.display = 'block'; // Afișează footer-ul
+      showOrders(); // Funcție deja configurată pentru comenzi
+  } else {
+      // Secțiune implicită dacă secțiunea nu este găsită
+      footer.style.display = 'block';
+      content.innerHTML = `
+          <div style="text-align: center; padding: 20px; background-color: white;">
+              <h1 style="color: red;">Eroare: Secțiunea nu a fost găsită!</h1>
+          </div>
+      `;
+  }
+}
+
+// Inițializează site-ul pe secțiunea „homepage” la încărcarea paginii
+window.onload = function () {
+  showSection('homepage');
+};
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const nextButton = document.querySelector('.next-btn');
+  const prevButton = document.querySelector('.prev-btn');
+
+  const slideWidth = slides[0].getBoundingClientRect().width;
+
+  // Setează poziția fiecărui slide
+  slides.forEach((slide, index) => {
+      slide.style.left = slideWidth * index + 'px';
+  });
+
+  const moveToSlide = (track, currentSlide, targetSlide) => {
+      track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
+      currentSlide.classList.remove('current-slide');
+      targetSlide.classList.add('current-slide');
+  };
+
+  // Funcționalitate pentru butonul "Next"
+  nextButton.addEventListener('click', () => {
+      const currentSlide = track.querySelector('.current-slide') || slides[0];
+      const nextSlide = currentSlide.nextElementSibling || slides[0];
+      moveToSlide(track, currentSlide, nextSlide);
+  });
+
+  // Funcționalitate pentru butonul "Prev"
+  prevButton.addEventListener('click', () => {
+      const currentSlide = track.querySelector('.current-slide') || slides[0];
+      const prevSlide = currentSlide.previousElementSibling || slides[slides.length - 1];
+      moveToSlide(track, currentSlide, prevSlide);
+  });
+});

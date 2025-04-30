@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recenzii Clienți</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+        }
+
+        /* Meniul */
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 20px;
+            text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .menu a:hover {
+            color: #353535;
+            transform: scale(1.1);
+        }
+
+        /* Secțiunea de recenzii */
+        .reviews-section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Gradient pentru titlu */
+.reviews-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #ff1e00, #0400ff, #da47ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efect de hover extravagant */
+.extravagant-hover:hover {
+    transform: scale(1.2) rotate(3deg);
+    text-shadow: 0 0 20px #ff3300, 0 0 30px #003cff, 0 0 40px #9700ee;
+    animation: titleHoverGlow 2s infinite alternate ease-in-out;
+}
+
+/* Animație pentru strălucire */
+@keyframes titleHoverGlow {
+    0% {
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #a200ff;
+    }
+    100% {
+        text-shadow: 0 0 20px #ec3616, 0 0 30px #4400ff, 0 0 40px #ff00f2;
+    }
+}
+
+        .review {
+            background: #1c1c1c;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .review:hover {
+            transform: translateY(-5px);
+        }
+
+        .review img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .review h3 {
+            font-size: 1.2rem;
+            color: #dad9d6;
+        }
+
+        .review p {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .stars {
+            color: #ffa500;
+        }
+
+        /* Paginare */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pagination button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .pagination button.active {
+            background: #000000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Meniu -->
+
+
+    <!-- Secțiunea de Recenzii -->
+    <div class="reviews-section">
+        <h1 class="reviews-title extravagant-hover">Recenziile Clienților Noștri</h1>
+        <div id="reviews-container">
+            <!-- Recenziile vor fi populate din JavaScript -->
+        </div>
+        <div class="pagination" id="pagination">
+            <!-- Butoanele de paginare vor fi populate din JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Datele recenziilor
+        const reviews = [
+            { name: "Client 1", text: "Produse excelente, livrare rapidă!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 2", text: "Foarte mulțumit de calitate!", stars: "★★★★☆", image: "images/profil.png" },
+            { name: "Client 3", text: "Recomand cu încredere acest magazin!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 4", text: "Tricourile sunt perfecte, mulțumesc!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 5", text: "Livrare rapidă și produse de calitate!", stars: "★★★★☆", image: "images/profil.png" },
+            { name: "Client 6", text: "Tricouri personalizate, perfect realizate!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 7", text: "Calitate excepțională, foarte mulțumit!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 8", text: "Totul a fost excelent, mulțumesc!", stars: "★★★★☆", image: "images/profil.png" },
+            { name: "Client 9", text: "Servicii rapide și produse excelente!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 10", text: "Recomand cu toată încrederea!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 11", text: "Produse foarte bune, mulțumesc!", stars: "★★★★☆", image: "images/profil.png" },
+            { name: "Client 12", text: "Calitate premium, livrare rapidă!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 13", text: "Recomand acest magazin tuturor!", stars: "★★★★★", image: "images/profil.png" },
+            { name: "Client 14", text: "Produse excelente, exact ce căutam!", stars: "★★★★☆", image: "images/profil.png" },
+            { name: "Client 15", text: "Livrare și calitate excelentă!", stars: "★★★★★", image: "images/profil.png" }
+        ];
+
+        const reviewsPerPage = 5;
+        let currentPage = 1;
+
+        // Funcția pentru afișarea recenziilor
+        function renderReviews(page) {
+            const start = (page - 1) * reviewsPerPage;
+            const end = start + reviewsPerPage;
+            const reviewsToDisplay = reviews.slice(start, end);
+
+            const reviewsContainer = document.getElementById("reviews-container");
+            reviewsContainer.innerHTML = reviewsToDisplay.map(review => `
+                <div class="review">
+                    <img src="${review.image}" alt="${review.name}">
+                    <h3>${review.name}</h3>
+                    <p>"${review.text}"</p>
+                    <div class="stars">${review.stars}</div>
+                </div>
+            `).join("");
+        }
+
+        // Funcția pentru afișarea butoanelor de paginare
+        function renderPagination() {
+            const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.className = i === currentPage ? "active" : "";
+                button.onclick = () => {
+                    currentPage = i;
+                    renderReviews(currentPage);
+                    renderPagination();
+                };
+                pagination.appendChild(button);
+            }
+        }
+
+        // Inițializare
+        renderReviews(currentPage);
+        renderPagination();
+    </script>
+</body>
+</html>
