@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ofertă surpriză</title>
+  <style>
+    /* General styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ec1118, #09bed6, #be1c91);
+      background-size: 300% 300%;
+      animation: background-animation 10s ease infinite;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @keyframes background-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .surpriza-container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      border: 3px solid #ff6f91;
+      border-radius: 20px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      max-width: 600px;
+    }
+
+    .surpriza-container h1 {
+      font-size: 2.8em;
+      color: #e08012;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      margin-bottom: 10px;
+    }
+
+    .surpriza-container p {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .wheel-container {
+      position: relative;
+      margin: 20px auto;
+    }
+
+    canvas {
+      border-radius: 50%;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    canvas:hover {
+      transform: scale(1.05);
+    }
+
+    #spin-button {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #spin-button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(90deg, #fbc2eb, #a6c1ee);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #spin-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .next-spin-info {
+      font-size: 1em;
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="surpriza-container">
+    <h1>🎉 Învârte roata norocului! 🎉</h1>
+    <p>Apasă pe roată pentru a descoperi ce premiu ai câștigat! Poți învârti o singură dată la 1-3 zile.</p>
+    <div class="wheel-container">
+      <canvas id="wheel" width="400" height="400"></canvas>
+      <button id="spin-button">🎁 Învârte roata 🎁</button>
+    </div>
+    <p id="next-spin-info" class="next-spin-info"></p>
+  </div>
+
+  <div class="instructions">
+    <h2>🎁 Cum să revendici premiul? 🎁</h2>
+    <p>1. După ce ai câștigat, ia o captură de ecran cu premiul afișat.</p>
+    <p>2. Trimite captura de ecran dupa compleatarea checkoutului pe WhatsApp.</p>
+    <p>3. Echipa noastră te va contacta în cel mai scurt timp pentru a-ți oferi premiul câștigat.</p>
+    <p>🎊 Mult noroc și distracție plăcută! 🎊</p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('wheel');
+    const ctx = canvas.getContext('2d');
+    const spinButton = document.getElementById('spin-button');
+    const nextSpinInfo = document.getElementById('next-spin-info');
+
+    const prizes = [
+      '1% reducere',  
+      '5% reducere', 
+      'Cupon de 10 lei', 
+      'Fara noroc!',
+      'Customizare gratuită',
+      
+    ];
+    const colors = ['red', 'blue', 'green', 'purple', 'pink'];
+    let isSpinning = false;
+
+    function drawWheel() {
+      const numSlices = prizes.length;
+      const sliceAngle = (2 * Math.PI) / numSlices;
+
+      for (let i = 0; i < numSlices; i++) {
+        ctx.beginPath();
+        ctx.moveTo(200, 200); // Center of the wheel
+        ctx.arc(200, 200, 200, i * sliceAngle, (i + 1) * sliceAngle);
+        ctx.closePath();
+
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(200, 200);
+        ctx.rotate((i + 0.5) * sliceAngle);
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 16px Arial';
+        ctx.fillText(prizes[i], 120, 10);
+        ctx.restore();
+      }
+    }
+
+    function spinWheel() {
+      if (isSpinning) return;
+
+      const lastSpinTime = localStorage.getItem('lastSpinTime');
+      const now = new Date().getTime();
+      const oneDay = 24 * 60 * 60 * 1000;
+
+      if (lastSpinTime && now - lastSpinTime < oneDay) {
+        const nextSpinDate = new Date(parseInt(lastSpinTime) + oneDay);
+        nextSpinInfo.textContent = `Poți învârti din nou pe ${nextSpinDate.toLocaleDateString()} la ${nextSpinDate.toLocaleTimeString()}.`;
+        return;
+      }
+
+      isSpinning = true;
+      let rotation = Math.random() * 360 + 720; // Minimum 2 full rotations
+      let currentRotation = 0;
+
+      const spinInterval = setInterval(() => {
+        currentRotation += 20;
+        ctx.clearRect(0, 0, 400, 400);
+        ctx.save();
+        ctx.translate(200, 200);
+        ctx.rotate((currentRotation * Math.PI) / 180);
+        ctx.translate(-200, -200);
+        drawWheel();
+        ctx.restore();
+
+        if (currentRotation >= rotation) {
+          clearInterval(spinInterval);
+          isSpinning = false;
+
+          const selectedPrizeIndex = Math.floor(((360 - (rotation % 360)) / 360) * prizes.length);
+          const selectedPrize = prizes[selectedPrizeIndex];
+          alert(`Felicitări! Ai câștigat: ${selectedPrize}`);
+          localStorage.setItem('lastSpinTime', now);
+          nextSpinInfo.textContent = `Poți învârti din nou pe ${new Date(now + oneDay).toLocaleDateString()} la ${new Date(now + oneDay).toLocaleTimeString()}.`;
+        }
+      }, 30);
+    }
+
+    // Draw initial wheel and setup event listener
+    drawWheel();
+    spinButton.addEventListener('click', spinWheel);
+  </script>
+</body>
+</html>

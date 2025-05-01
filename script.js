@@ -1,12 +1,15 @@
 let products = [
     { id: 1, name: 'Tricou Real Madrid Home', price: '170 RON', image: 'images/rma.png' , sizes: ['XL'], description: 'Tricou oficial Real Madrid Home KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: alb, 15UCL Patch, HP Patch , player version, Mbappe 9' },
-    { id: 2, name: 'Tricou FC Barcelona Home', price: '170 RON', image: 'images/barca.png', sizes: ['XL'], description: 'Tricou oficial FC Barcelona Home KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru-rosu, 5UCL Patch, player version ,Lamine Yamal 19 ' },
+    { id: 2, name: 'Tricou FC Barcelona Home', price: '170 RON', image: 'images/barca.png', sizes: ['XL'], description: 'Tricou oficial FC Barcelona Home KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru-rosu, 5UCL Patch, player version , Lamine Yamal 19 ' },
     { id: 3, name: 'Tricou Real Madrid Away', price: '170 RON', image: 'images/rma2.png', sizes: [ 'XL'], description: 'Tricou oficial Real Madrid Away KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: portocaliu, 15UCL Patch, HP Patch, player version, Bellingham 5' },
     { id: 4, name: 'Tricou FC Barcelona Away', price: '170 RON', image: 'images/barca2.png', sizes: [ 'XL'], description: 'Tricou oficial FC Barcelona Away KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: negru, 5UCL Patch, Raphinha 11, player version' },
-    { id: 5, name: 'Tricou Chelsea', price: '170 RON', image: 'images/chelsea.png', sizes: [ 'XL'], description: 'Tricou oficial Chelsea KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru, Cole Palmer 20, player version' },
+    { id: 5, name: 'Tricou Chelsea', price: '170 RON', image: 'images/chelsea.png', sizes: [ 'XL'], description: 'Tricou oficial Chelsea KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: albastru, Cole Palmer 20, player version' },
     { id: 6, name: 'Tricou Man. City', price: '170 RON', image: 'images/city.png', sizes: ['XL'], description: 'Tricou oficial Manchester City KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru deschis, Haaland 9, player version' },
     { id: 7, name: 'Tricou Inter Miami', price: '170 RON', image: 'images/messi.png', sizes: ['XL'], description: 'Tricou oficial Inter Miami KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: roz, Lionel Messi 10, player version'  },
+    { id: 8, name: 'Mistery Box', price: '160 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza'  },
   ];
+  
+
   
 // Încarcă coșul și comenzile din localStorage la încărcarea paginii
 window.onload = function () {
@@ -37,7 +40,7 @@ window.onload = function () {
         <div class="welcome-section">
     <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri Fotbal</h1>
     <p class="gradient-text-subtitle">Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
-    <a href="recenzi.html" class="elegant-button">Vezi Recenzii!</a>
+    <a href="recenzi.html" class="elegant-button">Vezi Recenzi!</a>
 </div>
 
 
@@ -84,6 +87,9 @@ window.onload = function () {
         <div class="product-details" style="flex: 2;">
           <img src="${product.image}" alt="${product.name}" style="max-width: 100%; border-radius: 10px;">
           <h2>${product.name}</h2>
+                  <p style="color: green; font-size: 1.2em; display: flex; align-items: center;">
+          <span style="margin-right: 8px;">✔️</span> In aprovizionare stock
+        </p>
           <p>${product.price}</p>
           <h2>Descriere</h2>
           <p>${product.description}</p> <!-- Afișează descrierea produsului -->
@@ -166,9 +172,58 @@ window.onload = function () {
     html += `
       </div>
       <button onclick="openCheckoutOverlay()" style="margin-top: 20px; padding: 10px 20px; background-color:rgb(0, 0, 0); color: white; border: none; border-radius: 5px; cursor: pointer;">Checkout</button>
+      <button id="reservation-button" style="margin-top: 10px; padding: 10px 20px; background-color:rgb(0, 0, 0); color: white; border: none; border-radius: 5px; cursor: pointer;">Rezervare</button>
+      <div id="reservation-form" style="display: none; margin-top: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; background-color: #f9f9f9;">
+        <h3>Formular de rezervare</h3>
+        <form id="reservation-form-content">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br><br>
+  
+          <label for="phone">Telefon:</label>
+          <input type="tel" id="phone" name="phone" required><br><br>
+  
+          <label for="product">Produs:</label>
+          <select id="product" name="product">
+            ${cart.map(item => `<option value="${item.name}">${item.name}</option>`).join('')}
+          </select><br><br>
+  
+          <label for="date">Data:</label>
+          <input type="date" id="date" name="date" required><br><br>
+  
+          <button type="button" id="send-whatsapp" style="background-color:rgb(21, 139, 31); color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;">Trimite pe WhatsApp</button>
+        </form>
+      </div>
     `;
   
     content.innerHTML = html;
+  
+    // Adaugă eveniment pentru butonul Rezervare
+    document.getElementById('reservation-button').addEventListener('click', function () {
+      const reservationForm = document.getElementById('reservation-form');
+      reservationForm.style.display = reservationForm.style.display === 'none' ? 'block' : 'none';
+    });
+  
+    // Adaugă eveniment pentru trimiterea pe WhatsApp
+    document.getElementById('send-whatsapp').addEventListener('click', function () {
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const product = document.getElementById('product').value;
+      const date = document.getElementById('date').value;
+    
+      // Formatarea mesajului pentru WhatsApp
+      const message = `Rezervare produs:
+    Email: ${email}
+    Telefon: ${phone}
+    Produs: ${product}
+    Data: ${date}`;
+    
+      // Înlocuiește cu numărul tău de telefon complet, inclusiv codul de țară (exemplu: 40771234567 pentru România)
+      const yourPhoneNumber = "40771234567";
+      const whatsappURL = `https://wa.me/${yourPhoneNumber}?text=${encodeURIComponent(message)}`;
+      
+      // Deschide WhatsApp cu mesajul
+      window.open(whatsappURL, '_blank');
+    });
   }
   
   
@@ -588,7 +643,7 @@ function showSection(section) {
         <div class="welcome-section">
     <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri Fotbal</h1>
     <p class="gradient-text-subtitle">Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
-    <a href="recenzi.html" class="elegant-button">Vezi Recenzii!</a>
+    <a href="recenzi.html" class="elegant-button">Vezi Recenzi!</a>
 </div>
 
       `;
@@ -657,3 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
       moveToSlide(track, currentSlide, prevSlide);
   });
 });
+
+
+
+
