@@ -6,7 +6,7 @@ let products = [
     { id: 5, name: 'Tricou Chelsea', price: '170 RON', image: 'images/chelsea.png', sizes: [ 'XL'], description: 'Tricou oficial Chelsea KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: albastru, Cole Palmer 20, player version' },
     { id: 6, name: 'Tricou Man. City', price: '170 RON', image: 'images/city.png', sizes: ['XL'], description: 'Tricou oficial Manchester City KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru deschis, Haaland 9, player version' },
     { id: 7, name: 'Tricou Inter Miami', price: '170 RON', image: 'images/messi.png', sizes: ['XL'], description: 'Tricou oficial Inter Miami KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: roz, Lionel Messi 10, player version'  },
-    { id: 8, name: 'Mistery Box', price: '160 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza'  },
+    { id: 8, name: 'Mistery Box', price: '200 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza, Cutie surpriza, Fifa Card cu Jucatorul care a picat'  },
   ];
   
 
