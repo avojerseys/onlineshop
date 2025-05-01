@@ -8,14 +8,14 @@
     /* General styling */
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ec1118, #09bed6, #be1c91);
+      background: linear-gradient(135deg, #ff0008, #06e5ec, #be068a);
       background-size: 300% 300%;
       animation: background-animation 10s ease infinite;
       color: #333;
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
@@ -34,17 +34,18 @@
 
     .surpriza-container {
       text-align: center;
-      background: rgba(255, 255, 255, 0.8);
-      border: 3px solid #ff6f91;
+      background: rgba(255, 255, 255, 0.9);
+      border: 3px solid #000000;
       border-radius: 20px;
       box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
       padding: 30px;
       max-width: 600px;
+      margin-top: 20px;
     }
 
     .surpriza-container h1 {
-      font-size: 2.8em;
-      color: #e08012;
+      font-size: 2.5em;
+      color: #ff6f61;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
       margin-bottom: 10px;
     }
@@ -58,9 +59,14 @@
     .wheel-container {
       position: relative;
       margin: 20px auto;
+      width: 100%;
+      max-width: 400px;
     }
 
     canvas {
+      width: 100%; /* Make the canvas responsive */
+      max-width: 400px;
+      height: auto; /* Maintain aspect ratio */
       border-radius: 50%;
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease;
@@ -70,12 +76,24 @@
       transform: scale(1.05);
     }
 
+    #pointer {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 15px solid red;
+    }
+
     #spin-button {
       padding: 15px 30px;
-      font-size: 1.5em;
+      font-size: 1.2em;
       font-weight: bold;
       color: white;
-      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      background: linear-gradient(90deg, #2c2b2b, #000000);
       border: none;
       border-radius: 50px;
       cursor: pointer;
@@ -85,7 +103,7 @@
 
     #spin-button:hover {
       transform: scale(1.1);
-      background: linear-gradient(90deg, #fbc2eb, #a6c1ee);
+      background: linear-gradient(90deg, #05e298, #00e1ff);
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
     }
 
@@ -100,19 +118,66 @@
       font-weight: bold;
       margin-top: 10px;
     }
+
+    /* Overlay styling */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .overlay-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .overlay-content h2 {
+      color: #adadad;
+    }
+
+    .overlay-content button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: linear-gradient(90deg, #86a8e7, #91eac9);
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .overlay-content button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(90deg, #91eac9, #86a8e7);
+    }
   </style>
 </head>
 <body>
   <div class="surpriza-container">
     <h1>🎉 Învârte roata norocului! 🎉</h1>
-    <p>Apasă pe roată pentru a descoperi ce premiu ai câștigat! Poți învârti o singură dată la 1-3 zile.</p>
+    <p>Apasă pe roată pentru a descoperi ce premiu ai câștigat! Poți învârti o singură dată la 3 zile.</p>
     <div class="wheel-container">
       <canvas id="wheel" width="400" height="400"></canvas>
+      <div id="pointer"></div>
       <button id="spin-button">🎁 Învârte roata 🎁</button>
     </div>
     <p id="next-spin-info" class="next-spin-info"></p>
   </div>
-
   <div class="instructions">
     <h2>🎁 Cum să revendici premiul? 🎁</h2>
     <p>1. După ce ai câștigat, ia o captură de ecran cu premiul afișat.</p>
@@ -121,21 +186,32 @@
     <p>🎊 Mult noroc și distracție plăcută! 🎊</p>
   </div>
 
+  <div class="overlay" id="overlay">
+    <div class="overlay-content">
+      <h2 id="prize-message"></h2>
+      <button id="close-overlay">OK</button>
+    </div>
+  </div>
+
   <script>
     const canvas = document.getElementById('wheel');
     const ctx = canvas.getContext('2d');
     const spinButton = document.getElementById('spin-button');
     const nextSpinInfo = document.getElementById('next-spin-info');
+    const overlay = document.getElementById('overlay');
+    const prizeMessage = document.getElementById('prize-message');
+    const closeOverlay = document.getElementById('close-overlay');
 
+    // Prizes with weighted probabilities
     const prizes = [
-      '1% reducere',  
-      '5% reducere', 
-      'Cupon de 10 lei', 
-      'Fara noroc!',
-      'Customizare gratuită',
-      
+      { label: '1% reducere', weight: 30 },
+      { label: 'Customizare gratuită', weight: 5 }, // Low chance
+      { label: '5% reducere', weight: 30 },
+      { label: 'Transport gratuit', weight: 5 }, // Low chance
+      { label: 'Fără noroc', weight: 30 }
     ];
-    const colors = ['red', 'blue', 'green', 'purple', 'pink'];
+
+    const colors = ['red', 'blue', 'purple', 'green', 'orange', '#ffcc00'];
     let isSpinning = false;
 
     function drawWheel() {
@@ -157,8 +233,21 @@
         ctx.textAlign = 'center';
         ctx.fillStyle = 'white';
         ctx.font = 'bold 16px Arial';
-        ctx.fillText(prizes[i], 120, 10);
+        ctx.fillText(prizes[i].label, 120, 10);
         ctx.restore();
+      }
+    }
+
+    function weightedRandom(prizes) {
+      const totalWeight = prizes.reduce((sum, prize) => sum + prize.weight, 0);
+      const random = Math.random() * totalWeight;
+      let cumulativeWeight = 0;
+
+      for (let i = 0; i < prizes.length; i++) {
+        cumulativeWeight += prizes[i].weight;
+        if (random < cumulativeWeight) {
+          return i;
+        }
       }
     }
 
@@ -167,11 +256,12 @@
 
       const lastSpinTime = localStorage.getItem('lastSpinTime');
       const now = new Date().getTime();
-      const oneDay = 24 * 60 * 60 * 1000;
+      const threeDays = 3 * 24 * 60 * 60 * 1000;
 
-      if (lastSpinTime && now - lastSpinTime < oneDay) {
-        const nextSpinDate = new Date(parseInt(lastSpinTime) + oneDay);
+      if (lastSpinTime && now - lastSpinTime < threeDays) {
+        const nextSpinDate = new Date(parseInt(lastSpinTime) + threeDays);
         nextSpinInfo.textContent = `Poți învârti din nou pe ${nextSpinDate.toLocaleDateString()} la ${nextSpinDate.toLocaleTimeString()}.`;
+        nextSpinInfo.style.display = 'block';
         return;
       }
 
@@ -193,14 +283,21 @@
           clearInterval(spinInterval);
           isSpinning = false;
 
-          const selectedPrizeIndex = Math.floor(((360 - (rotation % 360)) / 360) * prizes.length);
-          const selectedPrize = prizes[selectedPrizeIndex];
-          alert(`Felicitări! Ai câștigat: ${selectedPrize}`);
+          const selectedPrizeIndex = weightedRandom(prizes);
+          const selectedPrize = prizes[selectedPrizeIndex].label;
+          prizeMessage.textContent = `Felicitări! Ai câștigat: ${selectedPrize}`;
+          overlay.classList.add('active');
           localStorage.setItem('lastSpinTime', now);
-          nextSpinInfo.textContent = `Poți învârti din nou pe ${new Date(now + oneDay).toLocaleDateString()} la ${new Date(now + oneDay).toLocaleTimeString()}.`;
+          nextSpinInfo.textContent = `Poți învârti din nou pe ${new Date(now + threeDays).toLocaleDateString()} la ${new Date(now + threeDays).toLocaleTimeString()}.`;
+          nextSpinInfo.style.display = 'block';
         }
       }, 30);
     }
+
+    // Close overlay handler
+    closeOverlay.addEventListener('click', () => {
+      overlay.classList.remove('active');
+    });
 
     // Draw initial wheel and setup event listener
     drawWheel();
