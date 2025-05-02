@@ -558,8 +558,8 @@ footer .social-links a img {
 }
 
 footer {
-  position: fixed;
-  bottom: 0px;
+  position: relative;
+  top: 50px;
   display: flex;
   width: 100%;
   justify-content: center;

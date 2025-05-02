@@ -6,7 +6,7 @@ let products = [
     { id: 5, name: 'Tricou Chelsea', price: '170 RON', image: 'images/chelsea.png', sizes: [ 'XL'], description: 'Tricou oficial Chelsea KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: albastru, Cole Palmer 20, player version' },
     { id: 6, name: 'Tricou Man. City', price: '170 RON', image: 'images/city.png', sizes: ['XL'], description: 'Tricou oficial Manchester City KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru deschis, Haaland 9, player version' },
     { id: 7, name: 'Tricou Inter Miami', price: '170 RON', image: 'images/messi.png', sizes: ['XL'], description: 'Tricou oficial Inter Miami KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: roz, Lionel Messi 10, player version'  },
-    { id: 8, name: 'Mistery Box', price: '200 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza, Cutie surpriza, Fifa Card cu Jucatorul care a picat'  },
+    { id: 8, name: 'Mistery Box', price: '160 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza'  },
   ];
   
 
@@ -38,10 +38,46 @@ window.onload = function () {
       footer.style.display = 'block';
       content.innerHTML = `
         <div class="welcome-section">
-    <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri Fotbal</h1>
+    <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri de Fotbal</h1>
     <p class="gradient-text-subtitle">Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
     <a href="recenzi.html" class="elegant-button">Vezi Recenzi!</a>
 </div>
+
+<!-- Imaginea logo-ului sub buton -->
+<div class="logo-container">
+    <img src="images/avo.jpg" alt="Logo Tricouri Fotbal" class="animated-logo-image">
+</div>
+
+<!-- Adaugă acest stil în secțiunea <style> a fișierului tău index.html -->
+
+<style>
+/* Stil pentru imaginea logo-ului */
+.logo-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.animated-logo-image {
+    width: 150px;
+    height: auto;
+    border-radius: 20px; /* Rotunjire colțuri */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adaugă un efect de umbră */
+    animation: rotateLogo 4s infinite ease-in-out;
+}
+
+/* Animația logo-ului */
+@keyframes rotateLogo {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(360deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(720deg) scale(1);
+    }
+}
+</style>
 
 
       `;
@@ -218,7 +254,7 @@ window.onload = function () {
     Data: ${date}`;
     
       // Înlocuiește cu numărul tău de telefon complet, inclusiv codul de țară (exemplu: 40771234567 pentru România)
-      const yourPhoneNumber = "40771234567";
+      const yourPhoneNumber = "40771214794";
       const whatsappURL = `https://wa.me/${yourPhoneNumber}?text=${encodeURIComponent(message)}`;
       
       // Deschide WhatsApp cu mesajul
@@ -641,10 +677,99 @@ function showSection(section) {
       footer.style.display = 'block'; // Afișează footer-ul
       content.innerHTML = `
         <div class="welcome-section">
-    <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri Fotbal</h1>
+    <h1 class="gradient-text">Bine ai venit la Magazinul de Tricouri de Fotbal</h1>
     <p class="gradient-text-subtitle">Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
     <a href="recenzi.html" class="elegant-button">Vezi Recenzi!</a>
 </div>
+
+<!-- Adaugă acest cod în fișierul tău index.html -->
+
+<!-- Secțiunea cu gradient RGB animat -->
+<div class="gradient-section">
+    <div class="logo-container">
+        <img src="images/avo.jpg  " alt="Logo Tricouri Fotbal" class="animated-logo-image">
+    </div>
+</div>
+
+<!-- Adaugă acest stil în secțiunea <style> a fișierului tău index.html -->
+
+<style>
+/* Gradient RGB animat pentru secțiunea indicată */
+.gradient-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(90deg, #ff0000,rgb(0, 217, 255),rgb(119, 0, 255));
+    background-size: 300% 300%;
+    animation: gradientAnimation 6s ease infinite;
+    color: white;
+}
+
+/* Stiluri pentru titlu și descriere */
+.gradient-section h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #ffcc00, #66ff66, #0066ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 3s infinite;
+}
+
+.gradient-section p {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Imaginea logo-ului */
+.logo-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.animated-logo-image {
+    width: 150px;
+    height: auto;
+    border-radius: 20px; /* Colțuri rotunjite */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: rotateLogo 4s infinite ease-in-out;
+}
+
+/* Animații */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradientText {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes rotateLogo {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(360deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(720deg) scale(1);
+    }
+}
+</style>
 
       `;
   } else if (section === 'tricouri') {
