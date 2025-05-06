@@ -6,7 +6,7 @@ let products = [
     { id: 5, name: 'Tricou Chelsea', price: '170 RON', image: 'images/chelsea.png', sizes: [ 'XL'], description: 'Tricou oficial Chelsea KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: albastru, Cole Palmer 20, player version' },
     { id: 6, name: 'Tricou Man. City', price: '170 RON', image: 'images/city.png', sizes: ['XL'], description: 'Tricou oficial Manchester City KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru deschis, Haaland 9, player version' },
     { id: 7, name: 'Tricou Inter Miami', price: '170 RON', image: 'images/messi.png', sizes: ['XL'], description: 'Tricou oficial Inter Miami KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: roz, Lionel Messi 10, player version'  },
-    { id: 8, name: 'Mistery Box', price: '200 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza'  },
+    { id: 8, name: 'Mistery Box', price: '160 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza'  },
   ];
   
 
@@ -43,156 +43,10 @@ window.onload = function () {
     <a href="recenzi.html" class="elegant-button">Vezi Recenzi!</a>
 </div>
 
-
 <!-- Imaginea logo-ului sub buton -->
-<!-- Secțiunea cu gradient RGB animat -->
-<div class="gradient-section">
-    <div class="logo-container">
-        <img src="images/avo.jpg  " alt="Logo Tricouri Fotbal" class="animated-logo-image">
-    </div>
+<div class="logo-container">
+    <img src="images/avo.jpg" alt="Logo Tricouri Fotbal" class="animated-logo-image">
 </div>
-<!-- Adaugă acest stil în secțiunea <style> a fișierului tău index.html -->
-
-<style>
-/* Gradient RGB animat pentru secțiunea indicată */
-.gradient-section {
-    text-align: center;
-    padding: 40px 20px;
-    background: linear-gradient(90deg, #ff0000,rgb(0, 217, 255),rgb(119, 0, 255));
-    background-size: 300% 300%;
-    animation: gradientAnimation 6s ease infinite;
-    color: white;
-}
-
-/* Stiluri pentru titlu și descriere */
-.gradient-section h1 {
-    font-size: 2.5rem;
-    background: linear-gradient(90deg, #ffcc00, #66ff66, #0066ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientText 3s infinite;
-}
-
-.gradient-section p {
-    font-size: 1.2rem;
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
-/* Imaginea logo-ului */
-.logo-container {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.animated-logo-image {
-    width: 150px;
-    height: auto;
-    border-radius: 20px; /* Colțuri rotunjite */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    animation: rotateLogo 4s infinite ease-in-out;
-}
-
-/* Animații */
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes gradientText {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes rotateLogo {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        transform: rotate(360deg) scale(1.1);
-    }
-    100% {
-        transform: rotate(720deg) scale(1);
-    }
-}
-</style>
-
-
-<div class="faq-section">
-    <h2>Întrebări frecvente</h2>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Ce este magazinul nostru? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Magazinul nostru oferă tricouri de fotbal de calitate 1:1.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Cât durează livrarea? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Livrarea durează între 1-3 zile (tricouri în stock). Dacă produsele nu sunt în stock, se efectuează PRECOMENZI, iar livrarea durează între 9 și 12 zile lucrătoare.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Cum plătesc? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Produsele pot fi plătite cu cardul sau ramburs la livrare. În cazul precomenzilor, produsul trebuie plătit în avans pentru a garanta livrarea și a evita răzgândirile. Pentru a verifica că echipa noastră este de încredere, vă rugăm să consultați recenziile noastre.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-           Se pot customiza produsele? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Da, doar cu precomanda . Cum am precizat mai sus, trebuie sa se faca plata in avans!
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Ce mărimi sunt disponibile? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Avem disponibile mărimi de la S la XXL ,in stock de obicei doar L, XL , de asemenea se face rost de orice marime la precomanda.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Oferim reduceri? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Da, oferim reduceri sezoniere și codul nostru de reducere pentru 10%  la prima comanda, avem chiar si o roata de noroc unde puteti castiga diferite premii +10% reducere la comanda.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Cum pot urmări comanda mea? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            După plasarea comenzii, veți primi un email de confirmare a comenzii , iar dupa ce produsul este predat curierului se trimite si AWB. Acesta poate fi utilizat pe site-ul curierului pentru a monitoriza statusul livrării.
-        </div>
-    </div>
-</div>
-
-
 
 <!-- Adaugă acest stil în secțiunea <style> a fișierului tău index.html -->
 
@@ -282,14 +136,12 @@ window.onload = function () {
               .map(spec => `<li>${spec}</li>`) // Creează o listă ordonată
               .join('')}
           </ul>
-
           <label for="size">Alege mărimea:</label>
           <select id="size">
             ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
           </select>
           <button onclick="addToCart(${product.id})">Adaugă în coș</button>
         </div>
-        
   
         <!-- Secțiunea "Clienți au mai comandat" -->
         <div class="recommended-products" style="flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
@@ -304,9 +156,6 @@ window.onload = function () {
           `).join('')}
         </div>
       </div>
-
-
-
     `;
   }
   
@@ -833,11 +682,6 @@ function showSection(section) {
     <a href="recenzi.html" class="elegant-button">Vezi Recenzi!</a>
 </div>
 
-
-
-
-
-
 <!-- Adaugă acest cod în fișierul tău index.html -->
 
 <!-- Secțiunea cu gradient RGB animat -->
@@ -846,70 +690,8 @@ function showSection(section) {
         <img src="images/avo.jpg  " alt="Logo Tricouri Fotbal" class="animated-logo-image">
     </div>
 </div>
+
 <!-- Adaugă acest stil în secțiunea <style> a fișierului tău index.html -->
-
-
-
-<div class="faq-section">
-    <h2>Întrebări frecvente</h2>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Ce este magazinul nostru? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Magazinul nostru oferă tricouri de fotbal de calitate 1:1.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Cât durează livrarea? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Livrarea durează între 1-3 zile (tricouri în stock). Dacă produsele nu sunt în stock, se efectuează PRECOMENZI, iar livrarea durează între 9 și 12 zile lucrătoare.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Cum plătesc? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Produsele pot fi plătite cu cardul sau ramburs la livrare. În cazul precomenzilor, produsul trebuie plătit în avans pentru a garanta livrarea și a evita răzgândirile. Pentru a verifica că echipa noastră este de încredere, vă rugăm să consultați recenziile noastre.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-           Se pot customiza produsele? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Da, doar cu precomanda . Cum am precizat mai sus, trebuie sa se faca plata in avans!
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Ce mărimi sunt disponibile? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Avem disponibile mărimi de la S la XXL ,in stock de obicei doar L, XL , de asemenea se face rost de orice marime la precomanda.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Oferim reduceri? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            Da, oferim reduceri sezoniere și codul nostru de reducere pentru 10%  la prima comanda, avem chiar si o roata de noroc unde puteti castiga diferite premii +10% reducere la comanda.
-        </div>
-    </div>
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFAQ(this)">
-            Cum pot urmări comanda mea? <span class="arrow">+</span>
-        </button>
-        <div class="faq-answer">
-            După plasarea comenzii, veți primi un email de confirmare a comenzii , iar dupa ce produsul este predat curierului se trimite si AWB. Acesta poate fi utilizat pe site-ul curierului pentru a monitoriza statusul livrării.
-        </div>
-    </div>
-</div>
-
 
 <style>
 /* Gradient RGB animat pentru secțiunea indicată */
@@ -1059,16 +841,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-function toggleFAQ(button) {
-  const faqItem = button.parentElement;
-  const answer = faqItem.querySelector('.faq-answer');
-  const arrow = button.querySelector('.arrow');
-  
-  if (answer.style.display === 'block') {
-      answer.style.display = 'none';
-      arrow.classList.remove('open');
-  } else {
-      answer.style.display = 'block';
-      arrow.classList.add('open');
-  }
-}

@@ -16,7 +16,7 @@ body {
         .promo-section {
             position: relative;
             text-align: center;
-            color: white;
+            color: rgb(63, 63, 63);
             width: 100vw;
             height: 100vh;
             overflow: hidden;
@@ -53,7 +53,7 @@ body {
 
         .cta-button {
             font-family: 'Montserrat', sans-serif;
-            background-color: #ff2222;
+            background-color: #000000;
             color: white;
             border: none;
             padding: 15px 30px;
@@ -66,14 +66,20 @@ body {
         }
 
         .cta-button:hover {
-            background-color: #e64a19;
+            background-color: #242323;
         }
 
         .code-display {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.2rem;
-            margin-top: 20px;
-            color: #333;
+            text-align: center;
+    background-color: #ffffff; /* Fundal roșu vibrant */
+    color: #000000; /* Text alb */
+    padding: 10px;  
+    border-radius: 5px;
+    font-family: 'Arial Black', sans-serif; /* Font boldat */
+    font-size: 18px;
+    margin: 20px auto;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adaugă o umbră pentru efect 3D */
         }
     </style>
 </head>
@@ -81,7 +87,7 @@ body {
     <div class="promo-section">
         <div class="promo-text">
             <h1>Reducere de Primăvară!</h1>
-            <p>Profită acum de -10% la toate produsele! Oferta valabilă pana pe 30/04/2025.</p>
+            <p>Profită acum de -10% la toate produsele! Oferta valabilă doar pentru prima comanda.</p>
             <button class="cta-button" id="get-code-button">Obține Codul</button>
             <button class="cta-button" id="view-offer-button">Acasa</button>
             <div class="code-display" id="promo-code" style="display: none;">Codul tău: AVO10</div>
