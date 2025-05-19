@@ -44,6 +44,23 @@ window.onload = function () {
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Imaginea logo-ului sub buton -->
 <!-- Secțiunea cu gradient RGB animat -->
 <div class="gradient-section">
@@ -291,6 +308,16 @@ window.onload = function () {
         </div>
         
   
+
+
+
+
+
+
+
+
+
+        
         <!-- Secțiunea "Clienți au mai comandat" -->
         <div class="recommended-products" style="flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
           <h3 style="text-align: center;">Clienți au mai comandat</h3>
@@ -356,6 +383,11 @@ window.onload = function () {
       `;
     });
   
+
+
+
+
+    
     html += `
       </div>
       <button onclick="openCheckoutOverlay()" style="margin-top: 20px; padding: 10px 20px; background-color:rgb(0, 0, 0); color: white; border: none; border-radius: 5px; cursor: pointer;">Checkout</button>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drop de Tricouri Speciale</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(120deg,#232323 0%, #7a7a7a 100%);
+      color: #f8f8f8;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.1rem;
+      background: linear-gradient(90deg, #5f5d5d, #292727, #000000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2.5rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.2rem;
+      justify-items: center;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto 2.5rem auto;
+      padding: 1rem;
+    }
+    .product-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #343434 65%, #ededed 120%);
+      border-radius: 22px;
+      padding: 1.7rem 1.2rem 1.2rem 1.2rem;
+      box-shadow: 0 8px 40px 0 rgba(31,38,135,0.29);
+      width: 270px;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.17s, box-shadow 0.17s;
+      border-bottom: 4px solid #bdbdbd;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 16px 44px 0 rgba(31,38,135,0.36);
+    }
+    .product-card img {
+      border-radius: 18px;
+      width: 210px;
+      height: 210px;
+      object-fit: cover;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 18px #0002;
+    }
+    .product-card h3 {
+      margin: 0.2rem 0 0.5rem 0;
+      color: #fff;
+      font-size: 1.08rem;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .product-card .desc {
+      font-size: 0.97rem;
+      color: #e0e0e0;
+      margin-bottom: 0.7rem;
+      text-align: center;
+      min-height: 40px;
+    }
+    .product-card .details {
+      font-size: 0.96rem;
+      color: #bbb;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-bottom: 1.1rem;
+      text-align: center;
+    }
+    .exotic-btn {
+      background: linear-gradient(90deg, #8b8b8b 0%, #888888 70%, #868686 100%);
+      color: #222;
+      border: none;
+      border-radius: 30px;
+      padding: 0.6rem 1.7rem;
+      font-weight: bold;
+      font-size: 1.01rem;
+      cursor: pointer;
+      transition: background 0.17s, color 0.17s, transform 0.13s, box-shadow 0.16s;
+      box-shadow: 0 2px 12px rgba(158, 168, 168, 0.2);
+      margin-top: 0.5rem;
+      letter-spacing: 1px;
+      outline: none;
+    }
+    .exotic-btn:hover, .exotic-btn:focus {
+      background: linear-gradient(90deg, #868686 0%, #8a8a8a 40%, #7c7c7c 100%);
+      color: #111;
+      transform: scale(1.05);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Formular WhatsApp + Checkout */
+    .order-form-container {
+      background: linear-gradient(135deg, #212121 0%, #fff 130%);
+      border-radius: 22px;
+      box-shadow: 0 8px 40px 0 rgba(31,38,135,0.19);
+      padding: 2rem 1.5rem 1.2rem 1.5rem;
+      max-width: 420px;
+      margin: 0 auto 2rem auto;
+      color: #222;
+    }
+    .order-form-container h2 {
+      color: #111;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      font-weight: 900;
+      letter-spacing: 1px;
+      font-size: 1.25rem;
+    }
+    .order-form label {
+      display: block;
+      margin-bottom: 0.2rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #222;
+    }
+    .order-form input, .order-form select, .order-form textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 0.8rem;
+      border-radius: 12px;
+      border: 1px solid #bbb;
+      font-size: 1rem;
+      background: #f3f3f3;
+      color: #222;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.18s;
+    }
+    .order-form input:focus, .order-form select:focus, .order-form textarea:focus {
+      border: 1.5px solid #3a393b;
+    }
+    .order-form button, .checkout-btn {
+      width: 100%;
+      margin-top: 0.9rem;
+      background: linear-gradient(90deg, #3a3a3a 0%, #494949 70%, #353535 100%);
+      color: #222;
+      border: none;
+      border-radius: 30px;
+      padding: 0.7rem 2.2rem;
+      font-weight: bold;
+      font-size: 1.08rem;
+      cursor: pointer;
+      transition: background 0.17s, color 0.17s, transform 0.13s, box-shadow 0.16s;
+      box-shadow: 0 2px 16px #0ff3;
+      letter-spacing: 1px;
+      outline: none;
+    }
+    .order-form button:hover, .checkout-btn:hover {
+      background: linear-gradient(90deg, #313131 0rgb(43, 43, 43)ed5 40%, #303030 100%);
+      color: #111;
+      transform: scale(1.04);
+      box-shadow: 0 6px 36px #0ff6;
+    }
+    @media (max-width: 950px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 650px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+      .product-card {
+        width: 98vw;
+        max-width: 320px;
+      }
+    }
+    /* Overlay */
+    #preorder-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(30,30,30,0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    #preorder-overlay .overlay-content {
+      background: linear-gradient(135deg, #fff 0%, #888 80%, #111 100%);
+      border-radius: 22px;
+      padding: 2rem 2.5rem 1.5rem 2.5rem;
+      max-width: 340px;
+      box-shadow: 0 8px 36px 0 rgba(31,38,135,0.23);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #111;
+    }
+    #preorder-overlay h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    #preorder-overlay p {
+      margin: 1rem 0 1.3rem 0;
+      color: #222;
+      font-size: 1.08rem;
+      line-height: 1.45;
+    }
+    #preorder-overlay a {
+      color: #222;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+    #preorder-overlay .overlay-btn {
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 0.68rem 1.6rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.18s, color 0.18s;
+    }
+    #preorder-overlay .overlay-btn:hover {
+      background: #fff;
+      color: #111;
+      border: 1px solid #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Drop de Tricouri LIMITED EDITION</h1>
+    <div class="products-grid">
+      <div class="product-card">
+        <img src="images/realpremium.png" alt="RMA PREMIUM 1" />
+        <h3>Tricou Real Madrid LIMITED EDITION</h3>
+        <p class="desc">Fan Version ,Loose FIT</p>
+        <div class="details">
+          <span>Mărimi: S, M, L, XL</span>
+          <span>Preț: 170 RON</span>
+        </div>
+        <button class="exotic-btn" onclick="selectProduct('RMA PREMIUM 1')">Alege acest model</button>
+      </div>
+      <div class="product-card">
+        <img src="images/realpremium1.jpg" alt="RMA PREMIUM 2" />
+        <h3>Tricou Real Madrid LIMITED EDITION</h3>
+        <p class="desc">Fan Version ,Loose FIT</p>
+        <div class="details">
+          <span>Mărimi: S, M, L, XL</span>
+          <span>Preț: 170 RON</span>
+        </div>
+        <button class="exotic-btn" onclick="selectProduct('RMA PREMIUM 2')">Alege acest model</button>
+      </div>
+      <div class="product-card">
+        <img src="images/realpremium2.png" alt="RMA PREMIUM 3" />
+        <h3>Tricou Real Madrid LIMITED EDITION</h3>
+        <p class="desc">Fan Version ,Loose FIT</p>
+        <div class="details">
+          <span>Mărimi: S, M, L, XL</span>
+          <span>Preț: 170 RON</span>
+        </div>
+        <button class="exotic-btn" onclick="selectProduct('RMA PREMIUM 3')">Alege acest model</button>
+      </div>
+      <div class="product-card">
+        <img src="images/barcapremium.png" alt="BAR PREMIUM 1" />
+        <h3>Tricou Barcelona LIMITED EDITION</h3>
+        <p class="desc">Ediție rară, pentru fani adevărați.</p>
+        <div class="details">
+          <span>Mărimi: S, M, L, XL</span>
+          <span>Preț: 170 RON</span>
+        </div>
+        <button class="exotic-btn" onclick="selectProduct('BAR PREMIUM 1')">Alege acest model</button>
+      </div>
+      <div class="product-card">
+        <img src="images/barcapremium1.png" alt="BAR PREMIUM 2" />
+        <h3>Tricou Barcelona LIMITED EDITION</h3>
+        <p class="desc">Fan Version ,Loose FIT</p>
+        <div class="details">
+          <span>Mărimi: S, M, L, XL</span>
+          <span>Preț: 170 RON</span>
+        </div>
+        <button class="exotic-btn" onclick="selectProduct('BAR PREMIUM 2')">Alege acest model</button>
+      </div>
+      <div class="product-card">
+        <img src="images/barcapremium2.png" alt="BAR PREMIUM 3" />
+        <h3>Tricou Barcelona LIMITED EDITION</h3>
+        <p class="desc">Fan Version ,Loose FIT.</p>
+        <div class="details">
+          <span>Mărimi: S, M, L, XL</span>
+          <span>Preț: 170 RON</span>
+        </div>
+        <button class="exotic-btn" onclick="selectProduct('BAR PREMIUM 3')">Alege acest model</button>
+      </div>
+    </div>
+
+    <div class="order-form-container">
+      <h2>Comandă rapidă pe WhatsApp</h2>
+      <form class="order-form" id="order-form" onsubmit="sendWhatsApp(event)">
+        <label for="product">Produs dorit:</label>
+        <input type="text" id="product" name="product" required placeholder="Model tricou" readonly />
+
+        <label for="size">Mărime:</label>
+        <select id="size" name="size" required>
+          <option value="">Alege mărimea...</option>
+          <option>S</option>
+          <option>M</option>
+          <option>L</option>
+          <option>XL</option>
+        </select>
+
+        <label for="name">Nume:</label>
+        <input type="text" id="name" name="name" required placeholder="Numele tău" />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="email@exemplu.com" />
+
+        <label for="phone">Telefon:</label>
+        <input type="text" id="phone" name="phone" required placeholder="07xxxxxxxx" />
+
+        <label for="details">Detalii suplimentare:</label>
+        <textarea id="details" name="details" rows="2" placeholder="Adresă completa(strada,oras,judet,cod zip,etc.), preferințe, etc"></textarea>
+
+        <button type="submit">Trimite pe WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Overlay Precomanda -->
+  <div id="preorder-overlay">
+    <div class="overlay-content">
+      <h3>Disponibil doar cu precomandă!</h3>
+      <p>
+        Acest produs este disponibil doar prin <b>precomandă</b>.<br>
+        Livrarea poate dura mai mult decât de obicei.<br>
+        Pentru detalii despre livrare, vezi secțiunea <a href="index.html#faq">FAQ</a>.
+      </p>
+      <button class="overlay-btn" onclick="closePreorderOverlay()">Am înțeles</button>
+    </div>
+  </div>
+  <script>
+    // Preselectează produsul și arată overlayul de precomandă
+    function selectProduct(name) {
+      document.getElementById('product').value = name;
+      document.getElementById('size').focus();
+      document.getElementById('preorder-overlay').style.display = 'flex';
+      window.scrollTo({top: document.querySelector('.order-form-container').offsetTop-20, behavior:'smooth'});
+    }
+    function closePreorderOverlay() {
+      document.getElementById('preorder-overlay').style.display = 'none';
+    }
+    // Trimite formularul pe WhatsApp
+    function sendWhatsApp(event) {
+      event.preventDefault();
+      // Completează cu numărul tău de WhatsApp (prefix internațional fără +)
+      const phone = "40771214794";
+      const prod = document.getElementById('product').value;
+      const size = document.getElementById('size').value;
+      const name = document.getElementById('name').value;
+      const userEmail = document.getElementById('email').value;
+      const userPhone = document.getElementById('phone').value;
+      const details = document.getElementById('details').value;
+      const message = `Salut! Vreau să comand:\n- Produs: ${prod}\n- Mărime: ${size}\n- Nume: ${name}\n- Email: ${userEmail}\n- Telefon: ${userPhone}\n- Detalii: ${details}`;
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+    // Checkout button (poți extinde cu funcționalități suplimentare)
+  </script>
+</body>
+</html>
