@@ -201,6 +201,7 @@
       line-height: 1.2em;
       border: 2px solid #f1f1f1;
     }
+    /* --- MODIFICARE: Butoane verticale pe desktop, orizontale pe mobil --- */
     .actions {
       position: absolute;
       right: 18px;
@@ -210,6 +211,7 @@
       align-items: center;
       gap: 22px;
       z-index: 5;
+      transition: all 0.2s;
     }
     .actions .action-btn {
       background: #232336;
@@ -247,199 +249,38 @@
       user-select: none;
       text-shadow: 0 2px 10px #111;
     }
-
-
-
-
-     /* Navbar lateral default (desktop) */
-.sidebar-nav {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 70px;
-  height: 100vh;
-  background: #111423;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 16px;
-  z-index: 99;
-  transition: all .2s;
-}
-.sidebar-nav .nav-item {
-  margin: 14px 0;
-  width: 90%;
-  text-align: center;
-}
-.sidebar-nav .nav-item .icon {
-  font-size: 22px;
-  margin-bottom: 3px;
-}
-.sidebar-nav .nav-item span {
-  font-size: 13px;
-  color: #fff;
-  display: block;
-}
-.sidebar-nav .nav-item.active {
-  background: #fe2c55;
-  border-radius: 12px;
-}
-
-@media (max-width: 700px) {
-  .sidebar-nav {
-    display: none;
-  }
-  .mobile-bottom-nav {
-    display: flex;
-  }
-}
-
-/* Navbar jos pe mobil */
-.mobile-bottom-nav {
-  display: none;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100vw;
-  background: #111423;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
-  z-index: 100;
-  justify-content: space-around;
-  align-items: center;
-  padding: 8px 0 6px 0;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
-}
-.mobile-bottom-nav .nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #fff;
-  font-size: 18px;
-  width: 20%;
-  transition: 0.15s;
-}
-.mobile-bottom-nav .nav-item.active {
-  color: #fe2c55;
-}
-.mobile-bottom-nav .nav-item span {
-  font-size: 12px;
-  margin-top: 2px;
-}
-
-
-
-
-/* Stiluri pentru butoane verticale acțiuni (desktop) */
-.action-buttons {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  z-index: 2;
-}
-.action-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #23243a;
-  border-radius: 50%;
-  width: 54px;
-  height: 54px;
-  justify-content: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.16);
-  color: #fff;
-  font-size: 22px;
-  margin-bottom: 2px;
-  transition: background 0.18s, transform 0.16s;
-}
-.action-button:hover {
-  background: #33344a;
-  transform: scale(1.07);
-}
-.action-button span {
-  font-size: 13px;
-  color: #fff;
-  margin-top: 2px;
-  font-weight: 600;
-}
-
-/* Pentru mobil - butoane mai mici, spațiere mai mică, perfect încadrate */
-@media (max-width: 650px) {
-  .action-buttons {
-    right: 8px;
-    top: 57%;
-    gap: 12px;
-  }
-  .action-button {
-    width: 36px;
-    height: 36px;
-    font-size: 15px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.14);
-    margin-bottom: 1px;
-  }
-  .action-button span {
-    font-size: 10px;
-    margin-top: 1px;
-  }
-}
-
-
-
-
-
-    
-    .nav-arrows {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 50%;
-      z-index: 20;
-      pointer-events: none;
-    }
-    .nav-arrows-inner {
-      position: fixed;
-      left: calc(90px + 430px + 44px);
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-      z-index: 30;
-      pointer-events: auto;
-    }
-    @media (max-width: 650px) {
-      .nav-arrows-inner {
-        left: unset;
-        right: 10px;
+    /* --- Responsive pentru butoane orizontale pe mobil --- */
+    @media (max-width: 600px) {
+      .actions {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8vw;
+        width: 100%;
+        margin: 0 auto;
+        background: rgba(24,24,35,0.97);
+        padding: 7px 0 3px 0;
+        border-radius: 0 0 14px 14px;
+        box-shadow: 0 4px 20px #0007;
+        z-index: 10;
+      }
+      .video-slide {
+        padding-bottom: 70px; /* spațiu pentru butoane orizontale */
+      }
+      .actions .action-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.05em;
+        margin-bottom: 0;
+      }
+      .actions .action-count {
+        font-size: 0.85em;
+        margin-bottom: 0;
+        margin-top: 2px;
       }
     }
-    .nav-arrow-btn {
-      background: #232336;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 46px;
-      height: 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.65em;
-      cursor: pointer;
-      transition: background 0.16s, color 0.16s;
-      margin-bottom: 2px;
-      border: 2px solid #232336;
-      box-shadow: 0 2px 8px #111b;
-    }
-    .nav-arrow-btn:hover {
-      background: #444;
-      color: #fe2c55;
-    }
+
     .video-meta {
       position: absolute;
       bottom: 18px;
@@ -462,6 +303,70 @@
     }
     ::-webkit-scrollbar { width: 0 !important }
     body { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Navbar fix pe mobil */
+    @media (max-width: 600px) {
+      .sidebar {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        top: unset;
+        width: 100vw;
+        height: 60px;
+        min-width: 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0;
+        box-shadow: 0 -2px 8px #0008;
+        z-index: 9999;
+        background: #161823;
+      }
+      .sidebar .logo {
+        display: none;
+      }
+      .sidebar .menu {
+        flex-direction: row;
+        width: auto;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+      }
+      .sidebar .menu li {
+        margin: 0 16px;
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .sidebar .menu li a {
+        width: 44px;
+        height: 44px;
+        font-size: 1em;
+        border-radius: 10px;
+        padding: 0;
+      }
+      .liked-section,
+      .liked-section.active {
+        display: none !important;
+      }
+      .feed-container {
+        margin-left: 0 !important;
+        width: 100vw !important;
+        border-radius: 0 !important;
+      }
+      .video-slide {
+        width: 98vw;
+        height: 98vw;
+        max-width: 98vw;
+        border-radius: 0;
+      }
+      .nav-arrows-inner {
+        left: unset;
+        right: 5px;
+      }
+    }
     @media (max-width: 800px) {
       .sidebar { width: 54px; min-width: 0; }
       .sidebar .logo img { height: 23px;}
@@ -469,15 +374,6 @@
       .feed-container { margin-left: 54px; width: calc(100vw - 54px);}
       .video-slide { width: 98vw; height: 98vw; max-width: 98vw; border-radius: 0;}
       .nav-arrows-inner { left: unset; right: 10px;}
-    }
-    @media (max-width: 600px) {
-      .feed-container, .video-slide {
-        margin-left: 0 !important;
-        width: 100vw !important;
-        border-radius: 0 !important;
-      }
-      .sidebar { display: none; }
-      .nav-arrows-inner { left: unset; right: 5px;}
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -507,23 +403,9 @@
       <div class="liked-list" id="likedList"></div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-  
-
   <!-- Main Feed -->
   <div class="feed-container" id="feedContainer">
     <!-- Slides will be generated by JS -->
-    <!-- SCROLL ARROWS: plasate dupa cadranul video, pe verticala -->
     <div class="nav-arrows">
       <div class="nav-arrows-inner">
         <button class="nav-arrow-btn" id="prevBtn" title="Anterior"><i class="fa-solid fa-chevron-up"></i></button>
@@ -531,7 +413,6 @@
       </div>
     </div>
   </div>
-
   <script>
     // -- VIDEO DATA, configure here --
     const videoData = [
@@ -595,7 +476,6 @@
         saveCount: "87",
         shareCount: "58"
       }
-      // Poți adăuga aici alte obiecte video sau imagine
     ];
 
     // --- Dynamic Slide Generation for Infinite Scroll ---
