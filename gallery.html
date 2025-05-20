@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Galerie TikTok Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      overflow: hidden;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+      width: 90px;
+      background: #161823;
+      color: #fff;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 18px;
+      min-width: 66px;
+      box-shadow: 2px 0 6px 0 rgba(0,0,0,0.10);
+    }
+    .sidebar .logo {
+      margin-bottom: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .sidebar .logo img {
+      height: 32px;
+      margin: 0 auto;
+      display: block;
+    }
+    .sidebar .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar .menu li {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0;
+    }
+    .sidebar .menu li a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.15em;
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      transition: background 0.17s, color 0.17s;
+      position: relative;
+    }
+    .sidebar .menu li a.active,
+    .sidebar .menu li a:hover {
+      background: #232336;
+      color: #fe2c55;
+    }
+    .sidebar .menu li a .fa {
+      font-size: 1.6em;
+      margin-bottom: 5px;
+    }
+    .sidebar .menu li a span {
+      font-size: 0.85em;
+    }
+    .liked-section {
+      margin-top: 40px;
+      width: 100%;
+      text-align: center;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      transition: 0.2s;
+    }
+    .liked-section.active {
+      display: flex;
+    }
+    .liked-section button {
+      margin-bottom: 9px;
+      background: #fe2c55;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 0.95em;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .liked-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      align-items: center;
+      max-height: 50vh;
+      overflow-y: auto;
+      margin-top: 5px;
+    }
+    .liked-thumb {
+      width: 54px;
+      height: 76px;
+      border-radius: 7px;
+      object-fit: cover;
+      background: #232336;
+      cursor: pointer;
+      border: 2px solid #fe2c55;
+      box-shadow: 0 2px 12px #fe2c5522;
+      transition: border 0.18s;
+    }
+    .liked-thumb:hover {
+      border: 2px solid #fff;
+    }
+    .feed-container {
+      margin-left: 90px;
+      width: calc(100vw - 90px);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-slide {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 430px;
+      max-width: 98vw;
+      height: 81vh;
+      background: #181823;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.72);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.36s cubic-bezier(.4,0,.2,1);
+      z-index: 1;
+    }
+    .video-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 2;
+    }
+    .video-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .video-container video,
+    .video-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      background: #222;
+      box-shadow: 0 0 0 1px #232336;
+    }
+    .caption {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.92);
+      color: #222;
+      font-size: 1.22em;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 12px;
+      max-width: 95%;
+      text-align: center;
+      z-index: 3;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      letter-spacing: 0.01em;
+      line-height: 1.2em;
+      border: 2px solid #f1f1f1;
+    }
+    .actions {
+      position: absolute;
+      right: 18px;
+      top: 34%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      z-index: 5;
+    }
+    .actions .action-btn {
+      background: #232336;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 1.6em;
+      border: 2px solid #232336;
+      cursor: pointer;
+      transition: background 0.14s, color 0.14s;
+      outline: none;
+    }
+    .actions .action-btn.liked,
+    .actions .action-btn.liked:hover {
+      background: #fe2c55;
+      color: #fff;
+      border: 2px solid #fe2c55;
+    }
+    .actions .action-btn:hover {
+      background: #222;
+      color: #fe2c55;
+    }
+    .actions .action-count {
+      color: #fff;
+      font-size: 1em;
+      text-align: center;
+      margin-bottom: 7px;
+      margin-top: 3px;
+      font-weight: 400;
+      user-select: none;
+      text-shadow: 0 2px 10px #111;
+    }
+    .nav-arrows {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 50%;
+      z-index: 20;
+      pointer-events: none;
+    }
+    .nav-arrows-inner {
+      position: fixed;
+      left: calc(90px + 430px + 44px);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      z-index: 30;
+      pointer-events: auto;
+    }
+    @media (max-width: 650px) {
+      .nav-arrows-inner {
+        left: unset;
+        right: 10px;
+      }
+    }
+    .nav-arrow-btn {
+      background: #232336;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.65em;
+      cursor: pointer;
+      transition: background 0.16s, color 0.16s;
+      margin-bottom: 2px;
+      border: 2px solid #232336;
+      box-shadow: 0 2px 8px #111b;
+    }
+    .nav-arrow-btn:hover {
+      background: #444;
+      color: #fe2c55;
+    }
+    .video-meta {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      color: #fff;
+      background: rgba(22,22,36,0.48);
+      border-radius: 13px;
+      padding: 8px 15px 8px 13px;
+      font-size: 1em;
+      font-weight: 500;
+      user-select: none;
+      z-index: 5;
+      max-width: 72%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      letter-spacing: 0.01em;
+      border: 1px solid #232336;
+    }
+    ::-webkit-scrollbar { width: 0 !important }
+    body { -ms-overflow-style: none; scrollbar-width: none; }
+    @media (max-width: 800px) {
+      .sidebar { width: 54px; min-width: 0; }
+      .sidebar .logo img { height: 23px;}
+      .sidebar .menu li a { width: 40px; height: 40px; font-size: 0.9em;}
+      .feed-container { margin-left: 54px; width: calc(100vw - 54px);}
+      .video-slide { width: 98vw; height: 98vw; max-width: 98vw; border-radius: 0;}
+      .nav-arrows-inner { left: unset; right: 10px;}
+    }
+    @media (max-width: 600px) {
+      .feed-container, .video-slide {
+        margin-left: 0 !important;
+        width: 100vw !important;
+        border-radius: 0 !important;
+      }
+      .sidebar { display: none; }
+      .nav-arrows-inner { left: unset; right: 5px;}
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="images/tt.png" alt="TikTok" />
+    </div>
+    <ul class="menu">
+      <li>
+        <a href="index.html" title="Acasă">
+          <i class="fa-solid fa-house"></i>
+          <span style="margin-top:2px;">Acasă</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="active" title="For You">
+          <i class="fa-solid fa-fire"></i>
+          <span style="margin-top:2px;">For You</span>
+        </a>
+      </li>
+    </ul>
+    <div class="liked-section" id="likedSection">
+      <button id="showLikedBtn">Liked Videos</button>
+      <div class="liked-list" id="likedList"></div>
+    </div>
+  </div>
+
+  <!-- Main Feed -->
+  <div class="feed-container" id="feedContainer">
+    <!-- Slides will be generated by JS -->
+    <!-- SCROLL ARROWS: plasate dupa cadranul video, pe verticala -->
+    <div class="nav-arrows">
+      <div class="nav-arrows-inner">
+        <button class="nav-arrow-btn" id="prevBtn" title="Anterior"><i class="fa-solid fa-chevron-up"></i></button>
+        <button class="nav-arrow-btn" id="nextBtn" title="Următor"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // -- VIDEO DATA, configure here --
+    const videoData = [
+      {
+        id: 0,
+        type: "img",
+        src: "images/realpremium3.png",
+        thumb: "images/realpremium3.png",   
+        caption: "Footbal Jerseys",
+        meta: '@AVOJERSEYS &nbsp; <span style="color:#fe2c55;">#footballshirts</span> &nbsp; <span style="color:#fff;">!</span>',
+        likeCount: "65901",
+        commentCount: "2044",
+        saveCount: "5083",
+        shareCount: "951"
+      },
+      {
+        id: 1,
+        type: "video",
+        src: "images/video1.mov",
+        thumb: "images/avo.jpg",
+        caption: "Cele mai tari tricouri de fotbal💎",
+        meta: '@AVOJERSEYS &nbsp; <span style="color:#fe2c55;">#footballshirts</span>',
+        likeCount: "34521",
+        commentCount: "1098",
+        saveCount: "124",
+        shareCount: "51"
+      },
+      {
+        id: 2,
+        type: "video",
+        src: "images/video2.mov",
+        thumb: "images/rma2.png",
+        caption: "Football Jerseys Collection🔥",
+        meta: '@AVOJERSEYS &nbsp; <span style="color:#fe2c55;">#footballshirts</span>',
+        likeCount: "81498",
+        commentCount: "1256",
+        saveCount: "129",
+        shareCount: "57"
+      },
+      {
+        id: 3,
+        type: "video",
+        src: "images/video3.mov",
+        thumb: "images/barca.png",
+        caption: "La noi gasiti chiar si LTD💥",
+        meta: '@AVOJERSEYS &nbsp; <span style="color:#fe2c55;">#LTD</span>',
+        likeCount: "121428",
+        commentCount: "1316",
+        saveCount: "109",
+        shareCount: "77"
+      },
+      {
+        id: 4,
+        type: "video",
+        src: "images/video4.mov",
+        thumb: "images/barca.png",
+        caption: "Incredibil, nu?💗",
+        meta: '@AVOJERSEYS &nbsp; <span style="color:#fe2c55;">#LTD</span>',
+        likeCount: "61319",
+        commentCount: "931",
+        saveCount: "87",
+        shareCount: "58"
+      }
+      // Poți adăuga aici alte obiecte video sau imagine
+    ];
+
+    // --- Dynamic Slide Generation for Infinite Scroll ---
+    let slides = [];
+    let current = 0;
+    function createSlides() {
+      const feedContainer = document.getElementById('feedContainer');
+      // Remove old slides if any
+      slides.forEach(slide => {
+        if (slide.parentNode) slide.parentNode.removeChild(slide);
+      });
+      slides = [];
+      // Generate slides for each videoData
+      videoData.forEach((data, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'video-slide';
+        slide.setAttribute('data-id', data.id);
+        slide.setAttribute('data-type', data.type);
+        slide.setAttribute('data-src', data.src);
+        slide.setAttribute('data-thumb', data.thumb);
+        slide.setAttribute('data-caption', data.caption);
+
+        // Video/image container
+        const container = document.createElement('div');
+        container.className = 'video-container';
+
+        if (data.type === "video") {
+          const video = document.createElement('video');
+          video.src = data.src;
+          video.controls = true;
+          video.autoplay = true;
+          video.loop = true;
+          video.muted = true;
+          container.appendChild(video);
+        } else {
+          const img = document.createElement('img');
+          img.src = data.src;
+          img.alt = data.caption;
+          container.appendChild(img);
+        }
+
+        // Caption
+        const caption = document.createElement('div');
+        caption.className = 'caption';
+        caption.innerHTML = data.caption;
+        container.appendChild(caption);
+
+        // Meta
+        const meta = document.createElement('div');
+        meta.className = 'video-meta';
+        meta.innerHTML = data.meta;
+        container.appendChild(meta);
+
+        slide.appendChild(container);
+
+        // Actions
+        const actions = document.createElement('div');
+        actions.className = 'actions';
+
+        // Like button
+        const likeDiv = document.createElement('div');
+        const likeBtn = document.createElement('button');
+        likeBtn.className = 'action-btn like-btn';
+        likeBtn.title = 'Like';
+        likeBtn.setAttribute('data-id', data.id);
+        likeBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        const likeCount = document.createElement('div');
+        likeCount.className = 'action-count';
+        likeCount.id = 'likeCount' + data.id;
+        likeCount.innerText = data.likeCount;
+        likeDiv.appendChild(likeBtn);
+        likeDiv.appendChild(likeCount);
+        actions.appendChild(likeDiv);
+
+        // Eye button
+        const eyeDiv = document.createElement('div');
+        const eyeBtn = document.createElement('button');
+        eyeBtn.className = 'action-btn';
+        eyeBtn.title = "Vizualizări";
+        eyeBtn.innerHTML = '<i class="fa-regular fa-eye"></i>';
+        const eyeCount = document.createElement('div');
+        eyeCount.className = 'action-count';
+        eyeDiv.appendChild(eyeBtn);
+        eyeDiv.appendChild(eyeCount);
+        actions.appendChild(eyeDiv);
+
+        // Comment button
+        const commentDiv = document.createElement('div');
+        const commentBtn = document.createElement('button');
+        commentBtn.className = 'action-btn';
+        commentBtn.title = "Comentarii";
+        commentBtn.innerHTML = '<i class="fa-regular fa-comment-dots"></i>';
+        const commentCount = document.createElement('div');
+        commentCount.className = 'action-count';
+        commentCount.innerText = data.commentCount;
+        commentDiv.appendChild(commentBtn);
+        commentDiv.appendChild(commentCount);
+        actions.appendChild(commentDiv);
+
+        // Save button
+        const saveDiv = document.createElement('div');
+        const saveBtn = document.createElement('button');
+        saveBtn.className = 'action-btn';
+        saveBtn.title = "Salvează";
+        saveBtn.innerHTML = '<i class="fa-regular fa-bookmark"></i>';
+        const saveCount = document.createElement('div');
+        saveCount.className = 'action-count';
+        saveCount.innerText = data.saveCount;
+        saveDiv.appendChild(saveBtn);
+        saveDiv.appendChild(saveCount);
+        actions.appendChild(saveDiv);
+
+        // Share button
+        const shareDiv = document.createElement('div');
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'action-btn';
+        shareBtn.title = "Distribuie";
+        shareBtn.innerHTML = '<i class="fa-solid fa-share"></i>';
+        const shareCount = document.createElement('div');
+        shareCount.className = 'action-count';
+        shareCount.innerText = data.shareCount;
+        shareDiv.appendChild(shareBtn);
+        shareDiv.appendChild(shareCount);
+        actions.appendChild(shareDiv);
+
+        slide.appendChild(actions);
+
+        // Append before nav arrows
+        feedContainer.insertBefore(slide, document.querySelector('.nav-arrows'));
+        slides.push(slide);
+
+        // Assign like event later
+      });
+    }
+
+    // Helper for wrapping index for infinite scroll
+    function getWrappedIndex(idx) {
+      const n = videoData.length;
+      return ((idx % n) + n) % n;
+    }
+
+    // Show slide at virtual index (infinite)
+    function showSlideVirtual(virtualIdx) {
+      const n = videoData.length;
+      const idx = getWrappedIndex(virtualIdx);
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === idx);
+        let vid = slide.querySelector('video');
+        if (vid) {
+          if (i === idx) vid.play();
+          else { vid.pause(); vid.currentTime = 0; }
+        }
+      });
+      current = virtualIdx;
+    }
+
+    // Liked Videos Logic
+    let likedVideos = JSON.parse(localStorage.getItem('likedVideos') || '[]');
+    function updateLikeBtns() {
+      slides.forEach((slide, idx) => {
+        const btn = slide.querySelector('.like-btn');
+        const id = videoData[idx].id;
+        if (likedVideos.some(obj => obj.id == id)) {
+          btn.classList.add('liked');
+        } else {
+          btn.classList.remove('liked');
+        }
+      });
+    }
+    function updateLikedSection() {
+      const likedSection = document.getElementById('likedSection');
+      const likedList = document.getElementById('likedList');
+      likedSection.classList.toggle('active', likedVideos.length > 0);
+      likedList.innerHTML = '';
+      likedVideos.forEach(obj => {
+        const thumb = document.createElement('img');
+        thumb.className = 'liked-thumb';
+        thumb.src = obj.thumb;
+        thumb.title = obj.caption;
+        thumb.addEventListener('click', () => {
+          // find the index in videoData
+          let idx = videoData.findIndex(v => v.id == obj.id);
+          if (idx !== -1) showSlideVirtual(idx + Math.floor(current/videoData.length)*videoData.length); // preserve virtual position
+          if(window.innerWidth <= 800) document.getElementById('likedSection').classList.remove('active');
+        });
+        likedList.appendChild(thumb);
+      });
+    }
+
+    // EVENTS
+    function assignEvents() {
+      // Like buttons logic
+      slides.forEach((slide, idx) => {
+        const btn = slide.querySelector('.like-btn');
+        btn.onclick = function(e) {
+          const data = videoData[idx];
+          const id = data.id;
+          if (btn.classList.contains('liked')) {
+            likedVideos = likedVideos.filter(obj => obj.id != id);
+          } else {
+            likedVideos.push({
+              id: data.id,
+              type: data.type,
+              src: data.src,
+              thumb: data.thumb,
+              caption: data.caption
+            });
+          }
+          localStorage.setItem('likedVideos', JSON.stringify(likedVideos));
+          updateLikeBtns();
+          updateLikedSection();
+        };
+      });
+      // Show liked section on button click
+      document.getElementById('showLikedBtn').onclick = function() {
+        const likedList = document.getElementById('likedList');
+        if (likedList.style.display === "block") {
+          likedList.style.display = "none";
+        } else {
+          likedList.style.display = "block";
+        }
+      };
+      // Hide liked list on click outside (mobile)
+      document.addEventListener('click', function(e){
+        if (!document.getElementById('likedSection').contains(e.target)) {
+          document.getElementById('likedList').style.display = 'none';
+        }
+      });
+    }
+
+    // Navigation
+    function nextSlide() {
+      showSlideVirtual(++current);
+    }
+    function prevSlide() {
+      showSlideVirtual(--current);
+    }
+    document.getElementById('nextBtn').addEventListener('click', nextSlide);
+    document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+    // Mouse wheel/TikTok vertical scroll
+    let scrollTimeout;
+    window.addEventListener('wheel', function(event) {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (event.deltaY > 0) nextSlide();
+        else if (event.deltaY < 0) prevSlide();
+      }, 60);
+    });
+
+    // Touch (mobile) swipe simulation
+    let startY = null;
+    window.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) startY = e.touches[0].clientY;
+    });
+    window.addEventListener('touchend', e => {
+      if (startY !== null && e.changedTouches.length === 1) {
+        const dist = e.changedTouches[0].clientY - startY;
+        if (dist < -50) nextSlide();
+        else if (dist > 50) prevSlide();
+        startY = null;
+      }
+    });
+
+    window.addEventListener('blur', () => {
+      slides.forEach(slide => {
+        let vid = slide.querySelector('video');
+        if (vid) vid.pause();
+      });
+    });
+    window.addEventListener('focus', () => {
+      let idx = getWrappedIndex(current);
+      let vid = slides[idx].querySelector('video');
+      if (vid) vid.play();
+    });
+
+    // INIT
+    createSlides();
+    assignEvents();
+    updateLikeBtns();
+    updateLikedSection();
+    showSlideVirtual(current);
+
+    // When resizing and for responsive, re-create slides and reassign events
+    window.addEventListener('resize', () => {
+      createSlides();
+      assignEvents();
+      updateLikeBtns();
+      updateLikedSection();
+      showSlideVirtual(current);
+    });
+  </script>
+</body>
+</html>
