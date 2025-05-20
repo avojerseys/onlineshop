@@ -172,6 +172,85 @@ window.onload = function () {
 </style>
 
 
+
+
+
+<!-- Cod de pus în <head> (doar o singură dată) -->
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+<style>
+    .exotic-title {
+        font-family: 'Monoton', 'Orbitron', cursive, sans-serif;
+        font-size: 3.3rem;
+        font-weight: 900;
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, #ff512f 0%, #f9d423 40%, #43cea2 70%, #1e90ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-align: center;
+        margin: 42px 0 0 0;
+        filter: drop-shadow(0 4px 25px #43cea288);
+        animation: pulseTitle 1.5s infinite alternate cubic-bezier(.4,0,.2,1);
+        transition: all .3s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes pulseTitle {
+        0% { filter: drop-shadow(0 4px 25px #43cea288); transform: scale(1);}
+        100% { filter: drop-shadow(0 8px 45px #ff4e50cc); transform: scale(1.05);}
+    }
+    .exotic-btn {
+        padding: 10px 50px;
+        margin: 10px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(90deg, #ff512f 0%, #dd2476 70%, #1e90ff 100%);
+        border: none;
+        border-radius: 50px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        margin-top: 36px;
+        transition: transform 0.15s, box-shadow 0.15s;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .exotic-btn:before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%);
+        transition: opacity 0.3s;
+        opacity: 0;
+    }
+    .exotic-btn:hover:before {
+        opacity: 1;
+        animation: shine 0.75s forwards;
+    }
+    .exotic-btn:hover {
+        transform: scale(1.07) rotate(-2deg);
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.30);
+    }
+    @keyframes shine {
+        0% { left: -50%; top: -50%; }
+        100% { left: 100%; top: 100%; }
+    }
+</style>
+
+<!-- Cod de pus în <body>, unde vrei să apară secțiunea -->
+<div class="exotic-title">DROP TRICOURI LTD</div>
+<button class="exotic-btn" onclick="window.location.href='drop.html'">Vezi Drop-ul</button>
+
+
+
+
+
+
 <div class="faq-section">
     <h2>Întrebări frecvente</h2>
     <div class="faq-item">
@@ -932,6 +1011,87 @@ function showSection(section) {
     </div>
 </div>
 <!-- Adaugă acest stil în secțiunea <style> a fișierului tău index.html -->
+
+
+
+
+
+
+
+<!-- Cod de pus în <head> (doar o singură dată) -->
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+<style>
+    .exotic-title {
+        font-family: 'Monoton', 'Orbitron', cursive, sans-serif;
+        font-size: 3.3rem;
+        font-weight: 900;
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, #ff512f 0%, #f9d423 40%, #43cea2 70%, #1e90ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-align: center;
+        margin: 42px 0 0 0;
+        filter: drop-shadow(0 4px 25px #43cea288);
+        animation: pulseTitle 1.5s infinite alternate cubic-bezier(.4,0,.2,1);
+        transition: all .3s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes pulseTitle {
+        0% { filter: drop-shadow(0 4px 25px #43cea288); transform: scale(1);}
+        100% { filter: drop-shadow(0 8px 45px #ff4e50cc); transform: scale(1.05);}
+    }
+    .exotic-btn {
+        padding: 10px 50px;
+        margin: 10px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(90deg, #ff512f 0%, #dd2476 70%, #1e90ff 100%);
+        border: none;
+        border-radius: 50px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        margin-top: 36px;
+        transition: transform 0.15s, box-shadow 0.15s;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .exotic-btn:before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%);
+        transition: opacity 0.3s;
+        opacity: 0;
+    }
+    .exotic-btn:hover:before {
+        opacity: 1;
+        animation: shine 0.75s forwards;
+    }
+    .exotic-btn:hover {
+        transform: scale(1.07) rotate(-2deg);
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.30);
+    }
+    @keyframes shine {
+        0% { left: -50%; top: -50%; }
+        100% { left: 100%; top: 100%; }
+    }
+</style>
+
+<!-- Cod de pus în <body>, unde vrei să apară secțiunea -->
+<div class="exotic-title">DROP TRICOURI LTD</div>
+<button class="exotic-btn" onclick="window.location.href='drop.html'">Vezi Drop-ul</button>
+
+
+
+
 
 
 
