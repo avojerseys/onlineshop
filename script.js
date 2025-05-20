@@ -51,7 +51,30 @@ window.onload = function () {
 
 
 
-
+<div id="exotic-overlay">
+  <div class="overlay-content">
+    <h1>Drop nou de tricouri!</h1>
+    <p>A apărut noua colecție LTD. Nu rata ediția limitată!</p>
+    <div class="overlay-btns">
+      <button class="overlay-btn" onclick="toDrop()">Vezi Drop-ul</button>
+      <button class="overlay-btn" id="close-overlay-btn">Închide</button>
+    </div>
+  </div>
+</div>
+<script>
+  // Asigură-te că apare DOAR pe index.html
+  if (window.location.pathname.endsWith('index.html') || window.location.pathname === "/" ) {
+    document.getElementById('exotic-overlay').style.display = 'flex';
+  } else {
+    document.getElementById('exotic-overlay').style.display = 'none';
+  }
+  document.getElementById('close-overlay-btn').onclick = function() {
+    document.getElementById('exotic-overlay').style.display = 'none';
+  }
+  function toDrop() {
+    window.location.href = 'drop.html';
+  }
+</script>
 
 
 
@@ -864,6 +887,36 @@ function showSection(section) {
     <p class="gradient-text-subtitle">Descoperă cele mai bune tricouri pentru echipa ta preferată!</p>
     <a href="recenzi.html" class="elegant-button">Vezi Recenzi!</a>
 </div>
+
+
+
+
+
+
+<div id="exotic-overlay">
+  <div class="overlay-content">
+    <h1>Drop nou de tricouri!</h1>
+    <p>A apărut noua colecție LTD. Nu rata ediția limitată!</p>
+    <div class="overlay-btns">
+      <button class="overlay-btn" onclick="toDrop()">Vezi Drop-ul</button>
+      <button class="overlay-btn" id="close-overlay-btn">Închide</button>
+    </div>
+  </div>
+</div>
+<script>
+  // Asigură-te că apare DOAR pe index.html
+  if (window.location.pathname.endsWith('index.html') || window.location.pathname === "/" ) {
+    document.getElementById('exotic-overlay').style.display = 'flex';
+  } else {
+    document.getElementById('exotic-overlay').style.display = 'none';
+  }
+  document.getElementById('close-overlay-btn').onclick = function() {
+    document.getElementById('exotic-overlay').style.display = 'none';
+  }
+  function toDrop() {
+    window.location.href = 'drop.html';
+  }
+</script>
 
 
 
