@@ -202,7 +202,6 @@
       border: 2px solid #f1f1f1;
     }
 
-    /* --- META BANNER STIL TIKTOK din poza --- */
     .video-meta {
       position: absolute;
       bottom: 18px;
@@ -225,7 +224,6 @@
       display: flex;
       align-items: center;
       gap: 9px;
-      /* border-radius, padding, gap ajustate pentru modelul din poza */
     }
     .video-meta .username {
       color: #fff;
@@ -233,7 +231,6 @@
       font-family: inherit;
       font-size: 1.05em;
       letter-spacing: .01em;
-      /* spațiu la dreapta */
     }
     .video-meta .hashtag {
       color: #fe2c55;
@@ -290,47 +287,19 @@
       user-select: none;
       text-shadow: 0 2px 10px #111;
     }
-    /* --- Responsive pentru butoane orizontale pe mobil si centrare navbar --- */
+
+    /* === NAVBAR SUS PE MOBIL === */
     @media (max-width: 600px) {
-      .actions {
-        position: static;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 8vw;
-        width: 100%;
-        margin: 0 auto;
-        background: rgba(24,24,35,0.97);
-        padding: 7px 0 3px 0;
-        border-radius: 0 0 14px 14px;
-        box-shadow: 0 4px 20px #0007;
-        z-index: 10;
-      }
-      .video-slide {
-        padding-bottom: 70px; /* spațiu pentru butoane orizontale */
-      }
-      .actions .action-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1.05em;
-        margin-bottom: 0;
-      }
-      .actions .action-count {
-        font-size: 0.85em;
-        margin-bottom: 0;
-        margin-top: 2px;
-      }
       .sidebar {
-        position: fixed;
+        top: unset;
         left: 0;
         bottom: 0;
-        top: unset;
         width: 100vw;
         height: 60px;
         min-width: 0;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         padding: 0;
         box-shadow: 0 -2px 8px #0008;
         z-index: 9999;
@@ -340,61 +309,72 @@
         display: none;
       }
       .sidebar .menu {
-        flex-direction: row;
-        width: 100vw;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
+        display: none !important;
       }
-      .sidebar .menu li {
-        margin: 0 16px;
-        width: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .sidebar .menu li a {
-        width: 44px;
-        height: 44px;
-        font-size: 1em;
-        border-radius: 10px;
-        padding: 0;
-      }
-      /* Liked videos button centrat pe navbar */
-      .liked-section,
-      .liked-section.active {
+      /* Central NAVBAR SUS pentru butoane meniu */
+      .mobile-navbar {
         display: flex !important;
-        position: absolute;
-        bottom: 70px;
+        position: fixed;
+        top: 0;
         left: 0;
         width: 100vw;
-        justify-content: center;
+        height: 54px;
+        background: #161823;
+        z-index: 1001;
         align-items: center;
-        z-index: 10000;
-        background: none;
+        justify-content: center;
+        box-shadow: 0 2px 10px 0 rgba(0,0,0,0.18);
+        border-bottom: 1.5px solid #232336;
       }
-      .liked-list {
-        width: auto;
-        max-width: 90vw;
-        flex-direction: row;
+      .mobile-navbar .nav-center {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        position: relative;
+      }
+      .mobile-navbar .nav-btn {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 5px 14px;
+        border-radius: 10px;
+        transition: color 0.15s, background 0.16s;
+        display: flex;
+        align-items: center;
         gap: 5px;
       }
+      .mobile-navbar .nav-btn.active,
+      .mobile-navbar .nav-btn:focus,
+      .mobile-navbar .nav-btn:hover {
+        background: #232336;
+        color: #fe2c55;
+        outline: none;
+      }
+      .mobile-navbar .nav-btn .fa {
+        font-size: 1.1em;
+        margin-bottom: 0;
+      }
       .feed-container {
-        margin-left: 0 !important;
+        margin: 0 !important;
         width: 100vw !important;
         border-radius: 0 !important;
+        margin-top: 54px !important;
+        height: calc(100vh - 54px) !important;
       }
       .video-slide {
-        width: 98vw;
-        height: 98vw;
-        max-width: 98vw;
-        border-radius: 0;
+        width: 98vw !important;
+        height: 98vw !important;
+        max-width: 98vw !important;
+        border-radius: 0 !important;
       }
       .nav-arrows-inner {
         left: unset;
         right: 5px;
       }
+      /* Liked Videos button și listă rămân în sidebar pe mobil */
     }
     @media (max-width: 800px) {
       .sidebar { width: 54px; min-width: 0; }
@@ -408,6 +388,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
+  <!-- Central NAVBAR SUS PE MOBIL (doar pe mobil, cu display:none by default) -->
+  <div class="mobile-navbar" style="display:none;">
+    <div class="nav-center">
+      <a href="index.html" class="nav-btn" title="Acasă">
+        <i class="fa-solid fa-house"></i>
+        <span>Acasă</span>
+      </a>
+      <a href="#" class="nav-btn active" title="For You">
+        <i class="fa-solid fa-fire"></i>
+        <span>For You</span>
+      </a>
+    </div>
+  </div>
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="logo">
@@ -443,6 +436,18 @@
     </div>
   </div>
   <script>
+    // === NAVBAR SUS PE MOBIL: Show/hide on mobile only ===
+    function updateMobileNavbar() {
+      var mobileNav = document.querySelector('.mobile-navbar');
+      if(window.innerWidth <= 600) {
+        mobileNav.style.display = 'flex';
+      } else {
+        mobileNav.style.display = 'none';
+      }
+    }
+    updateMobileNavbar();
+    window.addEventListener('resize', updateMobileNavbar);
+
     // -- VIDEO DATA, configure here --
     const videoData = [
       {
@@ -558,7 +563,6 @@
         // Meta
         const meta = document.createElement('div');
         meta.className = 'video-meta';
-        // Banner TikTok-style: username + hashtag (daca vrei si mai multe hashtags, se adauga automat)
         meta.innerHTML = `<span class="username">${data.meta.username}</span> ${data.meta.hashtags.map(ht => `<span class="hashtag">${ht}</span>`).join(' ')}`;
         container.appendChild(meta);
 
@@ -639,8 +643,6 @@
         // Append before nav arrows
         feedContainer.insertBefore(slide, document.querySelector('.nav-arrows'));
         slides.push(slide);
-
-        // Assign like event later
       });
     }
 
@@ -695,9 +697,8 @@
         thumb.src = obj.thumb;
         thumb.title = obj.caption;
         thumb.addEventListener('click', () => {
-          // find the index in videoData
           let idx = videoData.findIndex(v => v.id == obj.id);
-          if (idx !== -1) showSlideVirtual(idx + Math.floor(current/videoData.length)*videoData.length); // preserve virtual position
+          if (idx !== -1) showSlideVirtual(idx + Math.floor(current/videoData.length)*videoData.length);
           if(window.innerWidth <= 800) document.getElementById('likedSection').classList.remove('active');
         });
         likedList.appendChild(thumb);
