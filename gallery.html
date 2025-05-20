@@ -247,6 +247,152 @@
       user-select: none;
       text-shadow: 0 2px 10px #111;
     }
+
+
+
+
+     /* Navbar lateral default (desktop) */
+.sidebar-nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 70px;
+  height: 100vh;
+  background: #111423;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  z-index: 99;
+  transition: all .2s;
+}
+.sidebar-nav .nav-item {
+  margin: 14px 0;
+  width: 90%;
+  text-align: center;
+}
+.sidebar-nav .nav-item .icon {
+  font-size: 22px;
+  margin-bottom: 3px;
+}
+.sidebar-nav .nav-item span {
+  font-size: 13px;
+  color: #fff;
+  display: block;
+}
+.sidebar-nav .nav-item.active {
+  background: #fe2c55;
+  border-radius: 12px;
+}
+
+@media (max-width: 700px) {
+  .sidebar-nav {
+    display: none;
+  }
+  .mobile-bottom-nav {
+    display: flex;
+  }
+}
+
+/* Navbar jos pe mobil */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background: #111423;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+  z-index: 100;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0 6px 0;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+.mobile-bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+  width: 20%;
+  transition: 0.15s;
+}
+.mobile-bottom-nav .nav-item.active {
+  color: #fe2c55;
+}
+.mobile-bottom-nav .nav-item span {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+
+
+
+/* Stiluri pentru butoane verticale acțiuni (desktop) */
+.action-buttons {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 2;
+}
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #23243a;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.16);
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 2px;
+  transition: background 0.18s, transform 0.16s;
+}
+.action-button:hover {
+  background: #33344a;
+  transform: scale(1.07);
+}
+.action-button span {
+  font-size: 13px;
+  color: #fff;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+/* Pentru mobil - butoane mai mici, spațiere mai mică, perfect încadrate */
+@media (max-width: 650px) {
+  .action-buttons {
+    right: 8px;
+    top: 57%;
+    gap: 12px;
+  }
+  .action-button {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.14);
+    margin-bottom: 1px;
+  }
+  .action-button span {
+    font-size: 10px;
+    margin-top: 1px;
+  }
+}
+
+
+
+
+
+    
     .nav-arrows {
       position: absolute;
       top: 50%;
@@ -361,6 +507,18 @@
       <div class="liked-list" id="likedList"></div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+  
 
   <!-- Main Feed -->
   <div class="feed-container" id="feedContainer">
