@@ -1,16 +1,25 @@
 let products = [
-    { id: 1, name: 'Tricou Real Madrid Home', price: '170 RON', image: 'images/rma.png' , sizes: ['XL'], description: 'Tricou oficial Real Madrid Home KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: alb, 15UCL Patch, HP Patch , player version, Mbappe 9' },
-    { id: 2, name: 'Tricou FC Barcelona Home', price: '170 RON', image: 'images/barca.png', sizes: ['XL'], description: 'Tricou oficial FC Barcelona Home KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru-rosu, 5UCL Patch, player version , Lamine Yamal 19 ' },
-    { id: 3, name: 'Tricou Real Madrid Away', price: '170 RON', image: 'images/rma2.png', sizes: [ 'XL'], description: 'Tricou oficial Real Madrid Away KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: portocaliu, 15UCL Patch, HP Patch, player version, Bellingham 5' },
-    { id: 4, name: 'Tricou FC Barcelona Away', price: '170 RON', image: 'images/barca2.png', sizes: [ 'XL'], description: 'Tricou oficial FC Barcelona Away KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: negru, 5UCL Patch, Raphinha 11, player version' },
-    { id: 5, name: 'Tricou Chelsea', price: '170 RON', image: 'images/chelsea.png', sizes: [ 'XL'], description: 'Tricou oficial Chelsea KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: albastru, Cole Palmer 20, player version' },
-    { id: 6, name: 'Tricou Man. City', price: '170 RON', image: 'images/city.png', sizes: ['XL'], description: 'Tricou oficial Manchester City KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru deschis, Haaland 9, player version' },
-    { id: 7, name: 'Tricou Inter Miami', price: '170 RON', image: 'images/messi.png', sizes: ['XL'], description: 'Tricou oficial Inter Miami KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: roz, Lionel Messi 10, player version'  },
-    { id: 8, name: 'Mistery Box', price: '200 RON', image: 'images/mistery.jfif ', sizes: ['XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza'  },
+    { id: 1, name: 'Tricou Real Madrid Home', price: '170 RON/35 EUR/ 40USD', image: 'images/rma.png' , sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou oficial Real Madrid Home KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: alb, 15UCL Patch , HP Patch ' },
+    { id: 2, name: 'Tricou FC Barcelona Home', price: '170 RON/35 EUR/ 40USD', image: 'images/barca.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou oficial FC Barcelona Home KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru-rosu, 5UCL Patch' },
+    { id: 3, name: 'Tricou Real Madrid Away', price: '170 RON/35 EUR/ 40USD', image: 'images/rma2.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou oficial Real Madrid Away KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: portocaliu, 15UCL Patch, HP Patch' },
+    { id: 4, name: 'Tricou FC Barcelona Away', price: '170 RON/35 EUR/ 40USD', image: 'images/barca2.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou oficial FC Barcelona Away KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: negru, 5UCL Patch' },
+    { id: 5, name: 'Tricou Chelsea', price: '170 RON/35 EUR/ 40USD', image: 'images/chelsea.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou oficial Chelsea KIT sezon 24/25 1:1 ', specifications: 'Material: 100% poliester, Culoare: albastru' },
+    { id: 6, name: 'Tricou Man. City', price: '170 RON/35 EUR/ 40USD', image: 'images/city.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou oficial Manchester City KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester, Culoare: albastru deschis' },
+    { id: 7, name: 'Tricou Inter Miami', price: '170 RON/35 EUR/ 40USD', image: 'images/messi.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou oficial Inter Miami KIT sezon 24/25 1:1', specifications: 'Material: 100% poliester'  },
+    { id: 8, name: 'Mistery Box', price: '170 RON/35 EUR/ 40USD', image: 'images/mistery.jfif', sizes: ['S', 'M', 'L', 'XL'], description: 'Mistery Box cu un tricou surpriza ales de noi', specifications: 'Tricou surpriza'  },
+    { id: 9, name: 'Tricou Brazil', price: '170 RON/35 EUR/ 40USD', image: 'images/brazil.jpg', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou LTD Brazil 1:1', specifications: 'Limited Edition, Fan Version, ALL PLAYERS, No Patches'  },
+    { id: 9, name: 'Tricou Portugalia', price: '170 RON/35 EUR/ 40USD', image: 'images/portugalia.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou Euro 24 1:1', specifications: 'Material 100% poliester, ALL PLAYERS, Euro Patch'  },
+    { id: 10, name: 'Tricou PSG', price: '170 RON/35 EUR/ 40USD', image: 'images/psg.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou Paris 24/25 Oficial 1:1 KIT ', specifications: 'Material 100% poliester, ALL PLAYERS, ALL Patches'  },
+    { id: 11, name: 'Tricou AC Milan', price: '170 RON/35 EUR/ 40USD', image: 'images/milan.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou Milan 1:1 KIT', specifications: 'Material 100% poliester, ALL Patches'  },
+    { id: 12, name: 'Tricou Argentina', price: '170 RON/35 EUR/ 40USD', image: 'images/argentina.jpg', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou Argentina 1:1 KIT', specifications: 'Material 100% poliester, ALL Patches, Customizare variata'  },
+    { id: 13, name: 'Tricou Inter', price: '170 RON/35 EUR/ 40USD', image: 'images/inter.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou Inter Milan 24/25 1:1 KIT', specifications: 'Material 100% poliester, ALL players, UCL Patch'  },
+    { id: 14, name: 'Tricou Arsenal', price: '170 RON/35 EUR/ 40USD', image: 'images/arsenal.jpg', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou Arsenal 1:1 KIT', specifications: 'Material 100% poliester, UCL Patch, '  },
+    { id: 15, name: 'Tricou Bayern', price: '170 RON/35 EUR/ 40USD', image: 'images/bayern.png', sizes: ['S', 'M', 'L', 'XL'], description: 'Tricou Bayern 1:1 KIT', specifications: 'Material 100% poliester, ALL Patches'  },
   ];
-  
 
-  
+ 
+
+
 // Încarcă coșul și comenzile din localStorage la încărcarea paginii
 window.onload = function () {
   const savedCart = localStorage.getItem('cart');
@@ -303,6 +312,14 @@ window.onload = function () {
     </div>
     <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(this)">
+            Ce inseamna In stoc furnizor? <span class="arrow">+</span>
+        </button>
+        <div class="faq-answer">
+            In stoc furnizor inseamna ca produsul va fi doar cu precomanda asa ca va dura transportul mai mult pana se fabrica si se aduce de la furnizor.
+        </div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
             Cum pot urmări comanda mea? <span class="arrow">+</span>
         </button>
         <div class="faq-answer">
@@ -389,7 +406,7 @@ window.onload = function () {
           <img src="${product.image}" alt="${product.name}" style="max-width: 100%; border-radius: 10px;">
           <h2>${product.name}</h2>
                   <p style="color: green; font-size: 1.2em; display: flex; align-items: center;">
-          <span style="margin-right: 8px;">✔️</span> In aprovizionare stock
+          <span style="margin-right: 8px;">✔️</span> In stoc furnizor
         </p>
           <p>${product.price}</p>
           <h2>Descriere</h2>
@@ -406,6 +423,16 @@ window.onload = function () {
           <select id="size">
             ${product.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
           </select>
+          <!-- ... restul codului paginii produsului ... -->
+
+<!-- Select versiune SUB select-ul de mărime -->
+<label for="versionSelect" style="font-weight: bold; display:block; margin-top: 10px;">Alege versiunea:</label>
+<select id="versionSelect" style="width: 200px; height: 40px; font-size: 18px; border-radius: 8px; margin-bottom: 16px; border: 2px solid #222;">
+  <option value="fan">Fan version</option>
+  <option value="player">Player version</option>
+</select>
+
+
           <button onclick="addToCart(${product.id})">Adaugă în coș</button>
         </div>
         
@@ -1147,6 +1174,14 @@ function showSection(section) {
     </div>
     <div class="faq-item">
         <button class="faq-question" onclick="toggleFAQ(this)">
+            Ce inseamna In stoc furnizor? <span class="arrow">+</span>
+        </button>
+        <div class="faq-answer">
+            In stoc furnizor inseamna ca produsul va fi doar cu precomanda asa ca va dura transportul mai mult pana se fabrica si se aduce de la furnizor.
+        </div>
+    </div>
+    <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
             Cum pot urmări comanda mea? <span class="arrow">+</span>
         </button>
         <div class="faq-answer">
@@ -1317,3 +1352,7 @@ function toggleFAQ(button) {
       arrow.classList.add('open');
   }
 }
+
+
+
+
